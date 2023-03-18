@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import Tour from '../components/Tour';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
 
 let tours = [
 	{

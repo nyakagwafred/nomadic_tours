@@ -1,10 +1,11 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Tour({ tour }) {
 	return (
 		<Card my-3 p-3 rounded>
-			<a href={tour.id}>
+			<Link to={`/tour/${tour.id}`}>
 				<Card.Img
 					src={tour.image}
 					variant="top"
@@ -13,16 +14,19 @@ function Tour({ tour }) {
 						objectFit: 'cover',
 					}}
 				></Card.Img>
-			</a>
+			</Link>
 
 			<Card.Body>
-				<a href={tour.id}>
+				<Link
+					to={`/tour/${tour.id}`}
+					className="text-monospace text-decoration-none text-success"
+				>
 					<Card.Title as="div">
 						<strong>
 							{tour.tour_name} for {tour.duration} Days
 						</strong>
 					</Card.Title>
-				</a>
+				</Link>
 				<Card.Text as="div">
 					<div className="my-3">{tour.tour_desc}</div>
 				</Card.Text>

@@ -1,8 +1,15 @@
 import React from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
+	const navigate = useNavigate();
+	const onLogout = () => {
+		navigate('/login');
+	};
+	const onSignout = () => {
+		navigate('/home');
+	};
 	return (
 		<div>
 			<Container>
@@ -35,16 +42,15 @@ function Login() {
 												controlId="formBasicCheckbox"
 											></Form.Group>
 											<div className="d-grid">
-												<Button variant="success" type="submit">
-													Sign In
+												<Button
+													variant="success"
+													type="submit"
+													onClick={onSignout}
+												>
+													Sign in
 												</Button>
 											</div>
 										</Form>
-										<div className="mt-3">
-											<p className="mb-0  text-center">
-												<Link to="/home">Enter</Link>
-											</p>
-										</div>
 									</div>
 								</div>
 							</Card.Body>
