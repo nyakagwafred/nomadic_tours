@@ -4,15 +4,18 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-//import 'Header.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
+	const navigate = useNavigate();
+	const onLogout = () => {
+		navigate('/Login');
+	};
 	return (
 		<>
 			<Navbar bg="dark" expand="lg">
 				<Container fluid>
-					<Navbar.Brand href="#" className="text-success">
+					<Navbar.Brand href="#" className="text-danger">
 						Nomadic Tours
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="navbarScroll" />
@@ -40,7 +43,9 @@ function Header() {
 								Search
 							</Button>
 						</Form>
-						<Button variant="outline-danger">Login</Button>
+						<Button variant="outline-danger" onClick={onLogout}>
+							Sign Out
+						</Button>
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>
