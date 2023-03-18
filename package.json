@@ -1,0 +1,11 @@
+{
+  "name": "nomadic_tours",
+  "version": "1.0.0",
+  "description": "Nomadic Tours Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fred Nyakagwa",
+  "license": "ISC"
+}
