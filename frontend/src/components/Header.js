@@ -23,24 +23,11 @@ function Header() {
 							navbarScroll
 						>
 							<Nav.Link href="#action1" className="text-light">
-								Home
-							</Nav.Link>
-							<Nav.Link href="#action1" className="text-light" href="#">
 								Safari
 							</Nav.Link>
-							<Nav.Link href="#action1" className="text-light" href="#">
+							<Nav.Link href="#action1" className="text-light">
 								Learn
 							</Nav.Link>
-							{/* <NavDropdown title="Another Link" id="navbarScrollingDropdown">
-								<NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-								<NavDropdown.Item href="#action4">
-									Another action
-								</NavDropdown.Item>
-								<NavDropdown.Divider />
-								<NavDropdown.Item href="#action5">
-									Something else here
-								</NavDropdown.Item>
-							</NavDropdown> */}
 						</Nav>
 						<Form className="d-flex">
 							<Form.Control
@@ -49,8 +36,11 @@ function Header() {
 								className="me-2"
 								aria-label="Search"
 							/>
-							<Button variant="outline-success">Search</Button>
+							<Button variant="outline-success" className="me-3">
+								Search
+							</Button>
 						</Form>
+						<Button variant="outline-danger">Login</Button>
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>
