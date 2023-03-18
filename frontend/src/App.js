@@ -13,7 +13,7 @@ function App() {
 				<Routes>
 					<Route path="/" exact element={<Register />} />
 					<Route path="/home" exact element={<HomeScreen />} />
-					<Route path="/Login" exact element={<Register />} />
+					<Route path="/Login" exact element={<Login />} />
 				</Routes>
 			</Fragment>
 		</Router>

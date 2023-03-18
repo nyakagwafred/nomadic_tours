@@ -54,8 +54,8 @@ function Register() {
 										</Form>
 										<div className="mt-3">
 											<p className="mb-0  text-center">
-												Already have an account??{' '}
-												<Link to="/home">Sign In</Link>
+												Already have an account?{' '}
+												<Link to="/login">Sign In</Link>
 											</p>
 										</div>
 									</div>
