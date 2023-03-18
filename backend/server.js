@@ -1,8 +1,13 @@
-const express = require('express');
-const dotenv = require('dotenv');
+import express from 'express';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+
+dotenv.config();
+
+// Connect Database
+connectDB();
 
 const app = express();
-dotenv.config();
 
 app.get('/', (req, res) => {
 	res.send('API is running');
