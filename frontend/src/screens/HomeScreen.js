@@ -16,6 +16,7 @@ let tours = [
 		num_reviews: 10,
 		rating: 4,
 		duration: 20,
+		category: 'Mountain',
 	},
 	{
 		id: 2,
@@ -28,6 +29,7 @@ let tours = [
 		num_reviews: 7,
 		rating: 3,
 		duration: 9,
+		category: 'Savanna',
 	},
 	{
 		id: 3,
@@ -40,6 +42,7 @@ let tours = [
 		num_reviews: 8,
 		rating: 3,
 		duration: 5,
+		category: 'Mountain',
 	},
 	{
 		id: 4,
@@ -52,6 +55,7 @@ let tours = [
 		num_reviews: 10,
 		rating: 4,
 		duration: 6,
+		category: 'Ocean and Lakes',
 	},
 ];
 
