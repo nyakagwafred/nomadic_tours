@@ -11,7 +11,8 @@ const connectDB = async () => {
 
 		console.log('DB Connected'.underline.inverse.green);
 	} catch (err) {
-		console.log('DB Not connected'.red);
+		//Check for any DB errors in development
+		console.log('DB not connected'.inverse.red);
 		console.error(err.message);
 		// Exit process with failure
 		process.exit(1);
