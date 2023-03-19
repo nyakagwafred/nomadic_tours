@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import colors from 'colors';
+import userRoutes from './routes/userRoutes.js';
 const app = express();
 dotenv.config();
 
@@ -12,6 +13,10 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Routes for user model
+app.use('/api/users', userRoutes);
+
+// Routes for tour model
 app.get('/', (req, res) => {
 	res.send('API is running');
 });
