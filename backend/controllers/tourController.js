@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler';
-import Tour from '../models//tourModel';
+import Tour from '../models/tourModel';
 
 // @desc    Fetch all products
 // @route   GET /api/products
