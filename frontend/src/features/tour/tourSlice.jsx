@@ -29,7 +29,6 @@ export const createTour = createAsyncThunk(
 );
 
 // Get tours
-
 export const getTours = createAsyncThunk(
 	'tours/getAll',
 	async (_, thunkAPI) => {

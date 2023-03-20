@@ -6,14 +6,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset } from '../../features/auth/authSlice';
+import { logout } from '../../features/auth/authSlice';
 
 function Header() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	//const { user } = useSelector((state) => state.auth);
+	// const { user } = useSelector((state) => state.auth);
 
-	//const { name, email, admin } = user;
+	// const { name, email, isAdmin } = user;
 
 	const onLogout = () => {
 		dispatch(logout());
@@ -28,7 +28,7 @@ function Header() {
 							to="/home"
 							className="text-monospace text-decoration-none text-success"
 						>
-							NOMADIC <span style={{ color: 'red' }}>TOURS</span>
+							NOMADIC <span style={{ color: 'red' }}>{2000 + 23}</span>
 						</Link>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="navbarScroll" />

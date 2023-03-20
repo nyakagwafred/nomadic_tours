@@ -1,38 +1,38 @@
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-const API_URL = '/api/users/';
+// import axios from 'axios';
+// import { Link, useNavigate } from 'react-router-dom';
+// const API_URL = '/api/users/';
 
-// Register user
-const register = async (userData) => {
-	const response = await axios.post(API_URL, userData);
+// // Register user
+// // const register = async (userData) => {
+// // 	const response = await axios.post(API_URL, userData);
 
-	if (response.data) {
-		localStorage.setItem('user', JSON.stringify(response.data));
-	}
+// // 	if (response.data) {
+// // 		localStorage.setItem('user', JSON.stringify(response.data));
+// // 	}
 
-	return response.data;
-};
+// // 	return response.data;
+// // };
 
-// Login user
-const login = async (userData) => {
-	const response = await axios.post(API_URL + 'login', userData);
+// // Login user
+// const login = async (userData) => {
+// 	const response = await axios.post(API_URL + 'login', userData);
 
-	if (response.data) {
-		localStorage.setItem('user', JSON.stringify(response.data));
-	}
+// 	if (response.data) {
+// 		localStorage.setItem('user', JSON.stringify(response.data));
+// 	}
 
-	return response.data;
-};
+// 	return response.data;
+// };
 
-//Logout user
-const logout = () => {
-	localStorage.removeItem('user');
-};
+// //Logout user
+// const logout = () => {
+// 	localStorage.removeItem('user');
+// };
 
-const authService = {
-	register,
-	logout,
-	login,
-};
+// const authService = {
+// 	register,
+// 	logout,
+// 	login,
+// };
 
-export default authService;
+// export default authService;

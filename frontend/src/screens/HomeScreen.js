@@ -6,17 +6,31 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import Loader from '../components/utils/Loader';
 import Message from '../components/utils/Message';
-import { getTours } from '../../src/features/tour/tourSlice';
+import { getTours, reset } from '../../src/features/tour/tourSlice';
+import { useNavigate } from 'react-router-dom';
 
 function HomeScreen() {
 	const dispatch = useDispatch();
-
+	const navigate = useNavigate();
+	const { user } = useSelector((state) => state.auth);
 	const tourList = useSelector((state) => state.tour);
 	const { tours, isError, isSuccess, isLoading, message } = tourList;
 
 	useEffect(() => {
+		if (isError) {
+			console.log(message);
+		}
+
+		if (!user) {
+			navigate('/login');
+		}
+
 		dispatch(getTours());
-	}, [dispatch]);
+
+		return () => {
+			dispatch(reset());
+		};
+	}, [user, navigate, isError, message, dispatch]);
 
 	return (
 		<>
