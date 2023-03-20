@@ -5,18 +5,10 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset } from '../../features/auth/authSlice';
 
 function Header() {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
-	//const { user } = useSelector((state) => state.auth);
-
-	//const { name, email, admin } = user;
-
 	const onLogout = () => {
-		dispatch(logout());
 		navigate('/login');
 	};
 	return (
@@ -37,7 +29,14 @@ function Header() {
 							className="me-auto my-2 my-lg-0"
 							style={{ maxHeight: '100px' }}
 							navbarScroll
-						></Nav>
+						>
+							{/* <Nav.Link href="#action1" className="text-light">
+								Safari
+							</Nav.Link>
+							<Nav.Link href="#action1" className="text-light">
+								Learn
+							</Nav.Link> */}
+						</Nav>
 						<Form className="d-flex">
 							<Form.Control
 								type="search"

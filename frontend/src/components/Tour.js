@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Tour({ tour }) {
 	return (
-		<Card my-3 p-3 rounded>
-			<Link to={`/tour/${tour.id}`}>
+		<Card className="mt-5">
+			<Link to={`/tour/${tour._id}`}>
 				<Card.Img
 					src={tour.image}
 					variant="top"
@@ -18,7 +18,7 @@ function Tour({ tour }) {
 
 			<Card.Body>
 				<Link
-					to={`/tour/${tour.id}`}
+					to={`/tour/${tour._id}`}
 					className="text-monospace text-decoration-none text-success"
 				>
 					<Card.Title as="div">

@@ -1,16 +1,12 @@
-import { combineReducers, applyMiddleware } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import authReducer from '../src/features/auth/authSlice';
+import tourReducer from '../src/features/tour/tourSlice';
 
-const reducer = combineReducers({});
-
-const middleware = [thunk];
-
-const store = configureStore(
-	reducer,
-	initialSate,
-	composeWithDevTools(applyMiddleware([...middleware])),
-);
+const store = configureStore({
+	reducer: {
+		auth: authReducer,
+		tour: tourReducer,
+	},
+});
 
 export default store;

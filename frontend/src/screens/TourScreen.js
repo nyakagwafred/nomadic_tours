@@ -1,63 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Container } from 'react-bootstrap';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-let tours = [
-	{
-		id: 1,
-		price: 2000,
-		image: '/images/cheetah.jpg',
-		country: 'Kenya',
-		tour_name: 'Nanyuki',
-		tour_desc:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mattis non mauris et viverra. Sed vel orci elit. Aenean fringilla, ante porttitor semper facilisis, arcu turpis gravida arcu, nec mollis leo tellus a tortor.',
-		num_reviews: 10,
-		rating: 4,
-		duration: 20,
-	},
-	{
-		id: 2,
-		price: 3000,
-		image: '/images/ballon.jpg',
-		country: 'Kenya',
-		tour_name: 'Kisii',
-		tour_desc:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mattis non mauris et viverra. Sed vel orci elit. Aenean fringilla, ante porttitor semper facilisis, arcu turpis gravida arcu, nec mollis leo tellus a tortor.',
-		num_reviews: 7,
-		rating: 3,
-		duration: 9,
-	},
-	{
-		id: 3,
-		price: 4000,
-		image: '/images/tree.jpg',
-		country: 'Kenya',
-		tour_name: 'Mombasa',
-		tour_desc:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mattis non mauris et viverra. Sed vel orci elit. Aenean fringilla, ante porttitor semper facilisis, arcu turpis gravida arcu, nec mollis leo tellus a tortor.',
-		num_reviews: 8,
-		rating: 3,
-		duration: 5,
-	},
-	{
-		id: 4,
-		price: 5000,
-		image: '/images/van.jpg',
-		country: 'Kenya',
-		tour_name: 'Eldoret',
-		tour_desc:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mattis non mauris et viverra. Sed vel orci elit. Aenean fringilla, ante porttitor semper facilisis, arcu turpis gravida arcu, nec mollis leo tellus a tortor.',
-		num_reviews: 10,
-		rating: 4,
-		duration: 6,
-	},
-];
+import { getTours } from '../../src/features/tour/tourSlice';
 
 function TourScreen({ match }) {
 	const { id } = useParams();
-	const tour = tours[id - 1];
+
+	const dispatch = useDispatch();
+
+	const tourList = useSelector((state) => state.tour);
+	const { tours, isError, isSuccess, isLoading, message } = tourList;
+
+	useEffect(() => {
+		dispatch(getTours());
+	}, [dispatch]);
+
+	// if (isSuccess) {
+	// 	const TOUR = tours.find((e) => e._id === id);
+	// 	console.log(TOUR._id);
+	// } else {
+	// 	console.log('Not Found');
+	// }
+
 	return (
 		<div>
 			<Header />
@@ -66,7 +34,7 @@ function TourScreen({ match }) {
 					Go Back
 				</Link>
 				<Row>
-					<Col md={6}>
+					{/* <Col md={6}>
 						<Image src={tour.image} fluid />
 					</Col>
 					<Col md={6}>
@@ -98,7 +66,7 @@ function TourScreen({ match }) {
 								</Button>
 							</ListGroup.Item>
 						</ListGroup>
-					</Col>
+					</Col> */}
 				</Row>
 			</Container>
 			<Footer />
