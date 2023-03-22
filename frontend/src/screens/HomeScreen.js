@@ -8,10 +8,14 @@ import Loader from '../components/utils/Loader';
 import Message from '../components/utils/Message';
 import { getTours, reset } from '../../src/features/tour/tourSlice';
 import { useNavigate } from 'react-router-dom';
+import CartScreen from './CartScreen';
+import Cart from './Cart';
+import { CartProvider, useCart } from 'react-use-cart';
 
 function HomeScreen() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
 	const { user } = useSelector((state) => state.auth);
 	const tourList = useSelector((state) => state.tour);
 	const { tours, isError, isSuccess, isLoading, message } = tourList;
@@ -24,20 +28,18 @@ function HomeScreen() {
 		if (!user) {
 			navigate('/login');
 		}
-
 		dispatch(getTours());
-
-		return () => {
-			dispatch(reset());
-		};
-	}, [user, navigate, isError, message, dispatch]);
+		// return () => {
+		// 	dispatch(reset());
+		// };
+	}, []);
 
 	return (
 		<>
 			{' '}
 			<Header />
 			<Container>
-				<h1 className="text-center">Available Tours</h1> <hr />
+				<h1 className="text-center">Tours for you.</h1> <hr />
 				{isLoading ? (
 					<Loader />
 				) : isError ? (

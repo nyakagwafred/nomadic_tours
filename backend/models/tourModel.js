@@ -18,6 +18,9 @@ const TourSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		tour_brief: {
+			type: String,
+		},
 		tour_desc: {
 			type: String,
 		},

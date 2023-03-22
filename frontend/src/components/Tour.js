@@ -28,7 +28,7 @@ function Tour({ tour }) {
 					</Card.Title>
 				</Link>
 				<Card.Text as="div">
-					<div className="my-3">{tour.tour_desc}</div>
+					<div className="my-3">{tour.tour_brief}</div>
 				</Card.Text>
 				<Card.Text as="div">
 					<div className="my-3">

@@ -39,8 +39,8 @@ const importData = async () => {
 const destroyData = async () => {
 	try {
 		//await Order.deleteMany();
-		//await Tour.deleteMany();
-		await User.deleteMany();
+		await Tour.deleteMany();
+		//await User.deleteMany();
 
 		console.log('Data Destroyed!'.red.inverse);
 		process.exit();
