@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button, Container, Navbar, Modal, Form } from 'react-bootstrap';
 import { useState, useContext } from 'react';
-//import { CartContext } from '../CartContext';
-//import CartProduct from './CartProduct';
+import { CartContext } from '../../context/CartContext';
+import CartProduct from '../../screens/CartProduct';
 
 function NavbarComponent() {
-	//const cart = useContext(CartContext);
+	const cart = useContext(CartContext);
 
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
@@ -28,11 +28,11 @@ function NavbarComponent() {
 	// 			}
 	// 		});
 	// };
+	function checkout() {
+		console.log('Checking out....');
+	}
 
-	// const productsCount = cart.items.reduce(
-	// 	(sum, product) => sum + product.quantity,
-	// 	0,
-	// );
+	const toursCount = cart.items.reduce((sum, tour) => sum + tour.quantity, 0);
 
 	return (
 		<>
@@ -60,7 +60,7 @@ function NavbarComponent() {
 					{/* <Navbar.Toggle /> */}
 
 					<Navbar.Collapse className="justify-content-end">
-						<Button onClick={handleShow}>View Cart ({0} Items)</Button>
+						<Button onClick={handleShow}>View Cart ({toursCount} Items)</Button>
 					</Navbar.Collapse>
 					<Navbar.Collapse className="justify-content-center">
 						<Button variant="link">Sign out</Button>
@@ -72,26 +72,26 @@ function NavbarComponent() {
 						<Modal.Title>Shopping Cart</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						{/* {productsCount > 0 ? (
-						<>
-							<p>Items in your cart:</p>
-							{cart.items.map((currentProduct, idx) => (
-								<CartProduct
-									key={idx}
-									id={currentProduct.id}
-									quantity={currentProduct.quantity}
-								></CartProduct>
-							))}
+						{toursCount > 0 ? (
+							<>
+								<p>Items in your cart:</p>
+								{cart.items.map((currentProduct, idx) => (
+									<CartProduct
+										key={idx}
+										id={currentProduct.id}
+										quantity={currentProduct.quantity}
+									></CartProduct>
+								))}
 
-							<h1>Total: {cart.getTotalCost().toFixed(2)}</h1>
+								<h5>Total KES: {cart.getTotalCost().toFixed(2)}</h5>
 
-							<Button variant="success" onClick={checkout}>
-								Purchase items!
-							</Button>
-						</>
-					) : (
-						<h1>There are no items in your cart!</h1>
-					)} */}
+								<Button variant="success" onClick={checkout}>
+									Proceed to Payment!
+								</Button>
+							</>
+						) : (
+							<h2>There are no items in your cart!</h2>
+						)}
 					</Modal.Body>
 				</Modal>
 			</Container>

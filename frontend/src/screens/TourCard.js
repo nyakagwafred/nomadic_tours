@@ -5,10 +5,9 @@ import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 
 function TourCard({ tour }) {
-	//const product = props.product;
 	const cart = useContext(CartContext);
-	const productQuantity = cart.getTourQuantity(tour.id);
-	//console.log(cart.items);
+	const tourQuantity = cart.getTourQuantity(tour.id);
+	console.log(cart.items.length);
 	return (
 		<Card className="mt-5">
 			<Link to={`/tour/${tour._id}`}>
@@ -42,9 +41,19 @@ function TourCard({ tour }) {
 					</div>
 				</Card.Text>
 				<Card.Text as="h5">KES {tour.price}</Card.Text>
-				<Button variant="dark" className="my-2">
-					Add To Cart
-				</Button>
+				{tourQuantity > 0 ? (
+					<Button
+						variant="danger"
+						onClick={() => cart.deleteFromCart(tour.id)}
+						className="my-2"
+					>
+						Remove from cart
+					</Button>
+				) : (
+					<Button variant="dark" onClick={() => cart.addOneToCart(tour.id)}>
+						Add To Cart
+					</Button>
+				)}
 			</Card.Body>
 		</Card>
 	);

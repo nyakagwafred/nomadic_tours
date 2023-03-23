@@ -10,7 +10,6 @@ import { toursArray } from '../data/ToursStore';
 function HomeScreen() {
 	// const cart = useContext(CartContext);
 	// console.log(cart.items);
-	console.log(toursArray);
 
 	return (
 		<>
