@@ -1,8 +1,14 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
-function Tour({ tour }) {
+function TourCard({ tour }) {
+	//const product = props.product;
+	const cart = useContext(CartContext);
+	const productQuantity = cart.getTourQuantity(tour.id);
+	//console.log(cart.items);
 	return (
 		<Card className="mt-5">
 			<Link to={`/tour/${tour._id}`}>
@@ -36,9 +42,12 @@ function Tour({ tour }) {
 					</div>
 				</Card.Text>
 				<Card.Text as="h5">KES {tour.price}</Card.Text>
+				<Button variant="dark" className="my-2">
+					Add To Cart
+				</Button>
 			</Card.Body>
 		</Card>
 	);
 }
 
-export default Tour;
+export default TourCard;

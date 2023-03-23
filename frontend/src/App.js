@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import HomeScreen from './screens/HomeScreen';
-import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from '../src/components/auth/Login';
 import Register from '../src/components/auth/Register';

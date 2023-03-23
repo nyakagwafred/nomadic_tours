@@ -1,9 +1,10 @@
+import React from 'react';
 import { createContext, useState } from 'react';
-import { productsArray, getProductData } from './productsStore';
+import { toursArray, getTourData } from '../data/ToursStore';
 
 export const CartContext = createContext({
 	items: [],
-	getProductQuantity: () => {},
+	getTourQuantity: () => {},
 	addOneToCart: () => {},
 	removeOneFromCart: () => {},
 	deleteFromCart: () => {},
@@ -11,13 +12,12 @@ export const CartContext = createContext({
 });
 
 export function CartProvider({ children }) {
-	const [cartProducts, setCartProducts] = useState([]);
+	const [cartTours, setCartTours] = useState([]);
 
 	// [ { id: 1 , quantity: 3 }, { id: 2, quantity: 1 } ]
 
-	function getProductQuantity(id) {
-		const quantity = cartProducts.find((product) => product.id === id)
-			?.quantity;
+	function getTourQuantity(id) {
+		const quantity = cartTours.find((product) => product.id === id);
 
 		if (quantity === undefined) {
 			return 0;
@@ -27,12 +27,12 @@ export function CartProvider({ children }) {
 	}
 
 	function addOneToCart(id) {
-		const quantity = getProductQuantity(id);
+		const quantity = getTourQuantity(id);
 
 		if (quantity === 0) {
 			// product is not in cart
-			setCartProducts([
-				...cartProducts,
+			setCartTours([
+				...cartTours,
 				{
 					id: id,
 					quantity: 1,
@@ -41,8 +41,8 @@ export function CartProvider({ children }) {
 		} else {
 			// product is in cart
 			// [ { id: 1 , quantity: 3 }, { id: 2, quantity: 1 } ]    add to product id of 2
-			setCartProducts(
-				cartProducts.map(
+			setCartTours(
+				cartTours.map(
 					(product) =>
 						product.id === id // if condition
 							? { ...product, quantity: product.quantity + 1 } // if statement is true
@@ -53,13 +53,13 @@ export function CartProvider({ children }) {
 	}
 
 	function removeOneFromCart(id) {
-		const quantity = getProductQuantity(id);
+		const quantity = getTourQuantity(id);
 
-		if (quantity == 1) {
+		if (quantity === 1) {
 			deleteFromCart(id);
 		} else {
-			setCartProducts(
-				cartProducts.map(
+			setCartTours(
+				cartTours.map(
 					(product) =>
 						product.id === id // if condition
 							? { ...product, quantity: product.quantity - 1 } // if statement is true
@@ -73,8 +73,8 @@ export function CartProvider({ children }) {
 		// [] if an object meets a condition, add the object to array
 		// [product1, product2, product3]
 		// [product1, product3]
-		setCartProducts((cartProducts) =>
-			cartProducts.filter((currentProduct) => {
+		setCartTours((cartTours) =>
+			cartTours.filter((currentProduct) => {
 				return currentProduct.id != id;
 			}),
 		);
@@ -82,16 +82,16 @@ export function CartProvider({ children }) {
 
 	function getTotalCost() {
 		let totalCost = 0;
-		cartProducts.map((cartItem) => {
-			const productData = getProductData(cartItem.id);
+		cartTours.map((cartItem) => {
+			const productData = getTourData(cartItem.id);
 			totalCost += productData.price * cartItem.quantity;
 		});
 		return totalCost;
 	}
 
 	const contextValue = {
-		items: cartProducts,
-		getProductQuantity,
+		items: cartTours,
+		getTourQuantity,
 		addOneToCart,
 		removeOneFromCart,
 		deleteFromCart,

@@ -1,5 +1,5 @@
 import { uuid } from 'uuidv4';
-const tours = [
+const toursArray = [
 	{
 		id: uuid(),
 		price: 2000,
@@ -114,4 +114,15 @@ const tours = [
 	},
 ];
 
-export default tours;
+function getTourData(id) {
+	let tourData = toursArray.find((tour) => tour.id === id);
+
+	if (tourData === undefined) {
+		console.log('Tour data does not exist for ID: ' + id);
+		return undefined;
+	}
+
+	return tourData;
+}
+
+export { toursArray, getTourData };

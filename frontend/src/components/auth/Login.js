@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import Alert from 'react-bootstrap/Alert';
-import { toast, ToastContainer } from 'react-toastify';
 import Loader from '../utils/Loader';
 import { login, reset } from '../../features/auth/authSlice';
 

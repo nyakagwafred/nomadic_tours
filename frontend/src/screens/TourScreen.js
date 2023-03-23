@@ -1,32 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getTours } from '../../src/features/tour/tourSlice';
+//import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 import Loader from '../components/utils/Loader';
 import Message from '../components/utils/Message';
 
 function TourScreen({ history, match }) {
-	const { id } = useParams();
+	// const { id } = useParams();
 
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+	// const dispatch = useDispatch();
+	// const navigate = useNavigate();
 
-	const tourList = useSelector((state) => state.tour);
-	const { tours, isError, isSuccess, isLoading, message } = tourList;
+	// const tourList = useSelector((state) => state.tour);
+	// const { tours, isError, isSuccess, isLoading, message } = tourList;
 
 	// useEffect(() => {
 	// 	dispatch(getTours());
 	// }, [isSuccess]);
 
-	const addToCartHandler = () => {
-		//history.push(`/cart/${match.params.id}?qty=${1}`);
-	};
+	// const addToCartHandler = () => {
+	// 	//history.push(`/cart/${match.params.id}?qty=${1}`);
+	// };
 
-	const tour = tours.find((e) => e._id === id);
+	//const tour = tours.find((e) => e._id === id);
 
 	return (
 		<div>
@@ -36,7 +35,7 @@ function TourScreen({ history, match }) {
 					Go Back
 				</Link>
 
-				{isLoading ? (
+				{/* {isLoading ? (
 					<Loader />
 				) : isError ? (
 					<Message variant="danger">Sorry! Try to reload.</Message>
@@ -79,7 +78,7 @@ function TourScreen({ history, match }) {
 							</Col>
 						</Row>
 					</>
-				)}
+				)} */}
 			</Container>
 			<Footer />
 		</div>

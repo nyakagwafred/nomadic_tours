@@ -3,7 +3,6 @@ import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import Alert from 'react-bootstrap/Alert';
 import { toast, ToastContainer } from 'react-toastify';
 import Loader from '../../components/utils/Loader';
 import { register, reset } from '../../features/auth/authSlice';
@@ -72,7 +71,7 @@ function Register() {
 							<Card.Body>
 								<div className="mb-3 mt-md-4">
 									<h2 className="fw-bold mb-2 text-center  text-success">
-										<img src="/images/tour.ico"></img> Nomadic Tours
+										<img src="/images/tour.ico" alt="Logo"></img> Nomadic Tours
 									</h2>
 									<div className="mb-3">
 										{/* Start of form */}

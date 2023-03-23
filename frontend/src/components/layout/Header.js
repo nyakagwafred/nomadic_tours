@@ -60,7 +60,7 @@ function NavbarComponent() {
 					{/* <Navbar.Toggle /> */}
 
 					<Navbar.Collapse className="justify-content-end">
-						<Button onClick={handleShow}>Cart ({0} Items)</Button>
+						<Button onClick={handleShow}>View Cart ({0} Items)</Button>
 					</Navbar.Collapse>
 					<Navbar.Collapse className="justify-content-center">
 						<Button variant="link">Sign out</Button>
