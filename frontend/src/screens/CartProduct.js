@@ -14,9 +14,12 @@ function CartProduct(props) {
 
 	return (
 		<>
-			<h6>To {tourData.tour_name}</h6>
-			<p>{quantity == 1 ? `${quantity} Person` : `${quantity} People`}</p>
-			<p>{moneyFormatter.format(quantity * tourData.price)}</p>
+			<p>
+				To {tourData.tour_name}{' '}
+				{quantity == 1 ? `${quantity} Person` : `${quantity} People`} at{' '}
+				{moneyFormatter.format(quantity * tourData.price)}{' '}
+			</p>
+
 			<Button
 				variant="danger"
 				size="sm"

@@ -8,7 +8,7 @@ import moneyFormatter from '../components/utils/CurrencyFormatter';
 function TourCard({ tour }) {
 	const cart = useContext(CartContext);
 	const tourQuantity = cart.getTourQuantity(tour.id);
-	console.log(cart.items.length);
+
 	return (
 		<Card className="mt-5">
 			<Link to={`/tour/${tour._id}`}>

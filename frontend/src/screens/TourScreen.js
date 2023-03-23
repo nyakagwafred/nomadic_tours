@@ -9,24 +9,6 @@ import Loader from '../components/utils/Loader';
 import Message from '../components/utils/Message';
 
 function TourScreen({ history, match }) {
-	// const { id } = useParams();
-
-	// const dispatch = useDispatch();
-	// const navigate = useNavigate();
-
-	// const tourList = useSelector((state) => state.tour);
-	// const { tours, isError, isSuccess, isLoading, message } = tourList;
-
-	// useEffect(() => {
-	// 	dispatch(getTours());
-	// }, [isSuccess]);
-
-	// const addToCartHandler = () => {
-	// 	//history.push(`/cart/${match.params.id}?qty=${1}`);
-	// };
-
-	//const tour = tours.find((e) => e._id === id);
-
 	return (
 		<div>
 			<Header />

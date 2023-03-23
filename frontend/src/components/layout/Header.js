@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Container, Navbar, Modal, Form } from 'react-bootstrap';
+import { Button, Navbar, Modal, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 import CartProduct from '../../screens/CartProduct';
@@ -39,7 +40,7 @@ function NavbarComponent() {
 
 	return (
 		<>
-			<Navbar expand="sm">
+			<Navbar fixed="top" bg="dark" expand="sm">
 				<Navbar.Brand href="/" className="me-5"></Navbar.Brand>
 				<Form className="d-flex">
 					<Form.Control
@@ -64,8 +65,9 @@ function NavbarComponent() {
 				<Navbar.Collapse className="justify-content-end">
 					<Button onClick={handleShow}>View Cart ({toursBooked} Items)</Button>
 				</Navbar.Collapse>
+
 				<Navbar.Collapse className="justify-content-center">
-					<Button variant="link">Sign out</Button>
+					<Link to="/login">Sign out</Link>
 				</Navbar.Collapse>
 			</Navbar>
 			<hr></hr>
@@ -92,9 +94,11 @@ function NavbarComponent() {
 							</h5>
 							<hr></hr>
 
-							<Button variant="success" onClick={checkout}>
-								Proceed to Payment!
-							</Button>
+							<Link to="/paypal">
+								<button type="button" className="btn btn-success">
+									Button
+								</button>
+							</Link>
 						</>
 					) : (
 						<h2 className="text-danger">There are no items in your cart!</h2>
