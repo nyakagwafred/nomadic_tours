@@ -8,9 +8,6 @@ import Loader from '../components/utils/Loader';
 import Message from '../components/utils/Message';
 import { getTours, reset } from '../../src/features/tour/tourSlice';
 import { useNavigate } from 'react-router-dom';
-import CartScreen from './CartScreen';
-import Cart from './Cart';
-import { CartProvider, useCart } from 'react-use-cart';
 
 function HomeScreen() {
 	const dispatch = useDispatch();

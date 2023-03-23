@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import colors from 'colors';
+//import colors from 'colors';
 
 dotenv.config();
-const db = process.env.MONGO_URI || 5000;
+//Mongo DB connection string
+const db = process.env.MONGO_URI;
 // Connect to MongoDB
 const connectDB = async () => {
 	try {
