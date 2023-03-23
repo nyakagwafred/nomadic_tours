@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import moneyFormatter from '../components/utils/CurrencyFormatter';
 
 function TourCard({ tour }) {
 	const cart = useContext(CartContext);
@@ -40,7 +41,7 @@ function TourCard({ tour }) {
 						{tour.rating} from {tour.num_reviews} reviews{' '}
 					</div>
 				</Card.Text>
-				<Card.Text as="h5">KES {tour.price}</Card.Text>
+				<Card.Text as="h5">{moneyFormatter.format(tour.price)}</Card.Text>
 				{tourQuantity > 0 ? (
 					<Button
 						variant="danger"

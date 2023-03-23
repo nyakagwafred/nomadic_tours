@@ -2,7 +2,8 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { CartContext } from '../context/CartContext';
 import { useContext } from 'react';
-import { getTourData } from '../data/ToursStore';
+import { getTourData } from '../data/toursStore';
+import moneyFormatter from '../components/utils/CurrencyFormatter';
 
 function CartProduct(props) {
 	const cart = useContext(CartContext);
@@ -13,12 +14,17 @@ function CartProduct(props) {
 
 	return (
 		<>
-			<h3>{tourData.title}</h3>
-			<p>{quantity} total</p>
-			<p>KES: {(quantity * tourData.price).toFixed(2)}</p>
-			<Button size="sm" onClick={() => cart.deleteFromCart(id)}>
+			<h6>To {tourData.tour_name}</h6>
+			<p>{quantity == 1 ? `${quantity} Person` : `${quantity} People`}</p>
+			<p>{moneyFormatter.format(quantity * tourData.price)}</p>
+			<Button
+				variant="danger"
+				size="sm"
+				onClick={() => cart.deleteFromCart(id)}
+			>
 				Remove
 			</Button>
+			<hr></hr>
 		</>
 	);
 }

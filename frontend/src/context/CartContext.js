@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContext, useState } from 'react';
-import { toursArray, getTourData } from '../data/ToursStore';
+import { toursArray, getTourData } from '../data/toursStore';
 
 export const CartContext = createContext({
 	items: [],

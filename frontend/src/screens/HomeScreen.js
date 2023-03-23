@@ -5,7 +5,7 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 //import { toursArray } from '../data/toursStore';
 import TourCard from './TourCard';
-import { toursArray } from '../data/ToursStore';
+import { toursArray } from '../data/toursStore';
 
 function HomeScreen() {
 	// const cart = useContext(CartContext);
