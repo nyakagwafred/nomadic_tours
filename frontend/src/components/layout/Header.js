@@ -5,31 +5,15 @@ import { useState, useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 import CartProduct from '../../screens/CartProduct';
 import moneyFormatter from '../utils/CurrencyFormatter';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { GoSignOut } from 'react-icons/go';
 
 function NavbarComponent() {
 	const cart = useContext(CartContext);
-
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-	// const checkout = async () => {
-	// 	await fetch('http://localhost:4000/checkout', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify({ items: cart.items }),
-	// 	})
-	// 		.then((response) => {
-	// 			return response.json();
-	// 		})
-	// 		.then((response) => {
-	// 			if (response.url) {
-	// 				window.location.assign(response.url); // Forwarding user to Stripe
-	// 			}
-	// 		});
-	// };
 	function checkout() {
 		console.log('Checking out....');
 	}
@@ -42,7 +26,7 @@ function NavbarComponent() {
 		<>
 			<Navbar fixed="top" bg="dark" expand="sm">
 				<Navbar.Brand href="/" className="me-5"></Navbar.Brand>
-				<Form className="d-flex">
+				<Form className="d-flex me-5">
 					<Form.Control
 						type="search"
 						placeholder="Search tours"
@@ -63,11 +47,15 @@ function NavbarComponent() {
 				{/* <Navbar.Toggle /> */}
 
 				<Navbar.Collapse className="justify-content-end">
-					<Button onClick={handleShow}>View Cart ({toursBooked} Items)</Button>
+					<Button onClick={handleShow}>
+						<AiOutlineShoppingCart onClick={handleShow} /> {toursBooked} tour(s)
+					</Button>
 				</Navbar.Collapse>
 
 				<Navbar.Collapse className="justify-content-center">
-					<Link to="/login">Sign out</Link>
+					<Link to="/login">
+						<GoSignOut />
+					</Link>
 				</Navbar.Collapse>
 			</Navbar>
 			<hr></hr>

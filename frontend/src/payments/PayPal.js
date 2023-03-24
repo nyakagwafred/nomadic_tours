@@ -1,10 +1,11 @@
 import React from 'react';
-import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+
 import { Col, Row, Container } from 'react-bootstrap';
 import moneyFormatter from '../components/utils/CurrencyFormatter';
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import ButtonWrapper from './ButtonWrapper';
+import { Link } from 'react-router-dom';
 
 function PayPal() {
 	const cart = useContext(CartContext);
@@ -16,10 +17,13 @@ function PayPal() {
 					<h4 className="text-center">
 						Total Amount is: {moneyFormatter.format(cart.getTotalCost())} OR USD{' '}
 						{cart.getTotalCost() > 0
-							? (cart.getTotalCost() / 120).toFixed(2)
+							? (cart.getTotalCost() / 100).toFixed(2)
 							: '0.00'}
 					</h4>
 					<ButtonWrapper currency={'USD'} showSpinner={false} />
+					<Link className="text-center" to="/home">
+						Back to listing
+					</Link>
 				</Col>
 			</Row>
 		</Container>

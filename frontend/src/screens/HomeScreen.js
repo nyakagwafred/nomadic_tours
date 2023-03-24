@@ -6,6 +6,7 @@ import Footer from '../components/layout/Footer';
 //import { toursArray } from '../data/toursStore';
 import TourCard from './TourCard';
 import { toursArray } from '../data/toursStore';
+import { FaBeer } from 'react-icons/fa';
 
 function HomeScreen() {
 	// const cart = useContext(CartContext);
@@ -16,7 +17,7 @@ function HomeScreen() {
 			{' '}
 			<Header />
 			<Container>
-				<h1 className="text-center">Tours for you.</h1> <hr />
+				<h1 className="text-center mt-5">Tours for you.</h1> <hr />
 				<>
 					<Row>
 						{toursArray.map((tour, idx) => {

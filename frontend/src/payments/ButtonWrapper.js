@@ -7,7 +7,7 @@ import { CartContext } from '../context/CartContext';
 const ButtonWrapper = ({ currency, showSpinner }) => {
 	const cart = useContext(CartContext);
 	// This values are the props in the UI
-	const amount = cart.getTotalCost() / 120;
+	const amount = cart.getTotalCost() / 100;
 
 	const style = { layout: 'vertical' };
 	// usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
