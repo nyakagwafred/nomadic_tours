@@ -5,14 +5,24 @@ import store from './store.js';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartProvider from './context/CartContext.js';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<CartProvider>
-				<App />
-			</CartProvider>
-		</Provider>
+		<PayPalScriptProvider>
+			<Provider store={store}>
+				<CartProvider
+					options={{
+						'client-id':
+							'AYqrUTC8nzBdVTPfrj_xHwoxSuDZzRnfWtjZzcnJ64J3Td8gyHMBO5TJIVHviaX2fkAK33Hm6XPhboxj',
+						'components': 'buttons',
+						'currency': 'USD',
+					}}
+				>
+					<App />
+				</CartProvider>
+			</Provider>
+		</PayPalScriptProvider>
 	</React.StrictMode>,
 );

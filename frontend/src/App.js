@@ -5,7 +5,6 @@ import Login from '../src/components/auth/Login';
 import Register from '../src/components/auth/Register';
 import TourScreen from './screens/TourScreen';
 import PayPal from './payments/PayPal';
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 function App() {
 	return (
