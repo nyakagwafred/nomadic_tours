@@ -96,7 +96,7 @@ function NavbarComponent() {
 
 							<Link to="/paypal">
 								<button type="button" className="btn btn-success">
-									Button
+									Proceed to payment
 								</button>
 							</Link>
 						</>

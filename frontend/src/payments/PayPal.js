@@ -1,12 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
+import moneyFormatter from '../components/utils/CurrencyFormatter';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
 function PayPal() {
-	const [paid, setPaid] = React.useState(false);
-	const [error, setError] = React.useState(null);
-	const paypalRef = React.useRef();
+	const [paid, setPaid] = useState(false);
+	const [error, setError] = useState(null);
+	const paypalRef = useRef();
+	const cart = useContext(CartContext);
+	const toursBooked = cart.items.length;
 
-	React.useEffect(() => {
+	useEffect(() => {
 		window.paypal
 			.Buttons({
 				createOrder: (data, actions) => {
@@ -16,7 +21,7 @@ function PayPal() {
 							{
 								description: 'Your description',
 								amount: {
-									currency_code: 'INR',
+									currency_code: cart.getTotalCost(),
 									value: 500.0,
 								},
 							},
@@ -51,7 +56,9 @@ function PayPal() {
 			<Container>
 				<Row className="vh-100 d-flex justify-content-center align-items-center">
 					<Col md={8} lg={6} xs={12}>
-						<h4>Total Amount in KES. : 500 /-</h4>
+						<h4 className="text-center">
+							Total Amount is: {moneyFormatter.format(cart.getTotalCost())}
+						</h4>
 						<div ref={paypalRef} />
 					</Col>
 				</Row>
