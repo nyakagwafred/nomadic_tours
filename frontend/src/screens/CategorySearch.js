@@ -20,7 +20,7 @@ function CategorySearch() {
 		return (
 			<>
 				<h1 className="vh-100 d-flex justify-content-center align-items-center">
-					No tour categories in this search. Try again with a different keyword
+					No tour categories in this search. Try again with a different keyword.
 				</h1>
 			</>
 		);

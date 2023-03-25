@@ -2,39 +2,31 @@ import React, { useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import Login from '../../src/components/auth/Login';
 import TourSearch from './TourSearch';
 import CategorySearch from './CategorySearch';
 import { CommonStateContext } from '../context/SearchContext';
+import { useSelector } from 'react-redux';
 
 function HomeScreen() {
-	const {
-		searchCategory,
-		searchTour,
-		isSearchTour,
-		isSearchCategory,
-	} = useContext(CommonStateContext);
-	console.log(`Category keyword is ....${searchCategory}`);
-	console.log(`Tour keyword is ....${searchTour}`);
-	console.log(`Search tour? ....${isSearchTour}`);
-	console.log(`Search category? ....${isSearchCategory}`);
+	const { isSearchTour } = useContext(CommonStateContext);
+	const { user } = useSelector((state) => state.auth);
 
-	// let toursList =
-	// 	toursArray &&
-	// 	toursArray.filter((tour) => {
-	// 		return (
-	// 			tour.tour_name.toLowerCase().includes(searchTour.toLowerCase()) ||
-	// 			!searchTour
-	// 		);
-	// 	});
+	if (user) {
+		return (
+			<>
+				<Header />
+				<Container>
+					{isSearchTour ? <TourSearch /> : <CategorySearch />}
+				</Container>
+				<Footer />
+			</>
+		);
+	}
 
 	return (
 		<>
-			{' '}
-			<Header />
-			<Container>
-				{isSearchTour ? <TourSearch /> : <CategorySearch />}
-			</Container>
-			<Footer />
+			<Login />
 		</>
 	);
 }

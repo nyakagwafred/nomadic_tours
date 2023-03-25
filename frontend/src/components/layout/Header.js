@@ -6,23 +6,23 @@ import { CartContext } from '../../context/CartContext';
 import CartProduct from '../../screens/CartProduct';
 import moneyFormatter from '../utils/CurrencyFormatter';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { GoSignOut } from 'react-icons/go';
 import {
 	CommonDispatchContext,
 	setSearchTour,
 	setSearchCategory,
 } from '../../context/SearchContext';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout, reset } from '../../features/auth/authSlice';
 
 function NavbarComponent() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { user } = useSelector((state) => state.auth);
 	const cart = useContext(CartContext);
 	const commonDispatch = useContext(CommonDispatchContext);
 	const [show, setShow] = useState(false);
+	const { user } = useSelector((state) => state.auth);
+	const { name } = user;
 	//Handler functions to handle show/hide cart modal
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -38,11 +38,8 @@ function NavbarComponent() {
 	};
 
 	const toursCount = cart.items.reduce((sum, tour) => sum + tour.quantity, 0);
-	//const { name } = user;
 
 	const toursBooked = cart.items.length;
-
-	// const { loggedUser } = JSON.parse(localStorage.getItem('user'));
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -72,29 +69,27 @@ function NavbarComponent() {
 						className="me-2"
 						aria-label="#"
 						name="email"
-						//value={categoryKeyword}
 						onChange={handleCategorySearchInput}
 					/>
 				</Form>
-				{/* <Navbar.Toggle /> */}
 
 				<Navbar.Collapse className="justify-content-end">
-					<Button onClick={handleShow}>
+					<Button onClick={handleShow} variant="outline-success">
 						<AiOutlineShoppingCart onClick={handleShow} /> {toursBooked} tour(s)
 					</Button>
 				</Navbar.Collapse>
 
-				<Navbar.Collapse className="justify-content-center">
-					<Link to="/login" onClick={handleLogout}>
-						<GoSignOut />
+				<Navbar.Collapse className="justify-content-center ">
+					<Link to="/login" onClick={handleLogout} className="text-success">
+						Sign out
 					</Link>
 				</Navbar.Collapse>
 
 				<Navbar.Collapse>
 					<Navbar.Text className="text-light">
 						Signed in as:{' '}
-						<a href="#" className="text-danger">
-							user01
+						<a href="#" className="text-success">
+							{name}
 						</a>
 					</Navbar.Text>
 				</Navbar.Collapse>
