@@ -7,6 +7,7 @@ import CartProduct from '../../screens/CartProduct';
 import moneyFormatter from '../utils/CurrencyFormatter';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { GoSignOut } from 'react-icons/go';
+import { AiOutlineSearch } from 'react-icons/ai';
 import {
 	CommonDispatchContext,
 	setSearchKeyword,
@@ -39,7 +40,6 @@ function NavbarComponent() {
 						aria-label="#"
 						onChange={handleSearchInput}
 					/>
-					<Button variant="outline-success">Search</Button>
 				</Form>
 				<Form className="d-flex">
 					<Form.Control
@@ -47,8 +47,8 @@ function NavbarComponent() {
 						placeholder="Search tour categories"
 						className="me-2"
 						aria-label="#"
+						onChange={handleSearchInput}
 					/>
-					<Button variant="outline-success">Search</Button>
 				</Form>
 				{/* <Navbar.Toggle /> */}
 
@@ -62,6 +62,15 @@ function NavbarComponent() {
 					<Link to="/login">
 						<GoSignOut />
 					</Link>
+				</Navbar.Collapse>
+
+				<Navbar.Collapse>
+					<Navbar.Text className="text-light">
+						Signed in as:{' '}
+						<a href="#" className="text-danger">
+							Mark Otto
+						</a>
+					</Navbar.Text>
 				</Navbar.Collapse>
 			</Navbar>
 			<hr></hr>

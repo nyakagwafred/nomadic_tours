@@ -9,7 +9,7 @@ import { CommonStateContext } from '../context/SearchContext';
 function HomeScreen() {
 	const { searchKeyword } = useContext(CommonStateContext);
 
-	const toursList =
+	let toursList =
 		toursArray &&
 		toursArray.filter((tour) => {
 			return (
@@ -17,7 +17,16 @@ function HomeScreen() {
 				!searchKeyword
 			);
 		});
-	console.log(toursList);
+
+	toursList =
+		toursArray &&
+		toursArray.filter((tour) => {
+			return (
+				tour.category.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+				!searchKeyword
+			);
+		});
+
 	return (
 		<>
 			{' '}
