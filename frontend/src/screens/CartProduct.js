@@ -7,8 +7,7 @@ import moneyFormatter from '../components/utils/CurrencyFormatter';
 import { AiFillDelete } from 'react-icons/ai';
 import { Container } from 'react-bootstrap';
 import { Col, Row } from 'react-bootstrap';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
+import { Tooltip } from 'react-tooltip';
 
 function CartProduct(props) {
 	const cart = useContext(CartContext);
@@ -20,22 +19,30 @@ function CartProduct(props) {
 		<>
 			<Container>
 				<Row>
-					<Col>
-						To {tourData.tour_name}{' '}
-						{moneyFormatter.format(quantity * tourData.price)}
+					<Col sm={8}>
+						To {tourData.tour_name} at{' '}
+						<u>{moneyFormatter.format(quantity * tourData.price)}</u> for{' '}
+						{tourData.duration} days.
 					</Col>
-					<Col>
+					<Col sm={4}>
 						<Button
 							variant="danger"
 							size="sm"
 							onClick={() => cart.deleteFromCart(id)}
 						>
-							<AiFillDelete />
+							{' '}
+							<a
+								data-tooltip-id="my-tooltip"
+								data-tooltip-content="Remove item from cart"
+							>
+								<AiFillDelete />
+							</a>
 						</Button>
 					</Col>
 				</Row>
 
 				<hr></hr>
+				<Tooltip id="my-tooltip" />
 			</Container>
 		</>
 	);
