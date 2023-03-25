@@ -7,26 +7,48 @@ import CartProduct from '../../screens/CartProduct';
 import moneyFormatter from '../utils/CurrencyFormatter';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { GoSignOut } from 'react-icons/go';
-import { AiOutlineSearch } from 'react-icons/ai';
 import {
 	CommonDispatchContext,
-	setSearchKeyword,
+	setSearchTour,
+	setSearchCategory,
 } from '../../context/SearchContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout, reset } from '../../features/auth/authSlice';
 
 function NavbarComponent() {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const { user } = useSelector((state) => state.auth);
 	const cart = useContext(CartContext);
 	const commonDispatch = useContext(CommonDispatchContext);
 	const [show, setShow] = useState(false);
-	//Header click and input handler functions
+	//Handler functions to handle show/hide cart modal
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-	const handleSearchInput = (event) => {
-		return setSearchKeyword(commonDispatch, event.target.value);
+	//Handler functions for searching keywords by category and tour products
+	const handleTourSearchInput = (event) => {
+		console.log(`Tour keyword is ....${event.target.value}`);
+		return setSearchTour(commonDispatch, event.target.value);
+	};
+
+	const handleCategorySearchInput = (event) => {
+		console.log(`Category keyword is ....${event.target.value}`);
+		return setSearchCategory(commonDispatch, event.target.value);
 	};
 
 	const toursCount = cart.items.reduce((sum, tour) => sum + tour.quantity, 0);
+	//const { name } = user;
 
 	const toursBooked = cart.items.length;
+
+	// const { loggedUser } = JSON.parse(localStorage.getItem('user'));
+
+	const handleLogout = () => {
+		dispatch(logout());
+		dispatch(reset());
+		navigate('/login');
+	};
 
 	return (
 		<>
@@ -38,7 +60,9 @@ function NavbarComponent() {
 						placeholder="Search tours"
 						className="me-2"
 						aria-label="#"
-						onChange={handleSearchInput}
+						name="email"
+						//value={tourKeyword}
+						onChange={handleTourSearchInput}
 					/>
 				</Form>
 				<Form className="d-flex">
@@ -47,7 +71,9 @@ function NavbarComponent() {
 						placeholder="Search tour categories"
 						className="me-2"
 						aria-label="#"
-						onChange={handleSearchInput}
+						name="email"
+						//value={categoryKeyword}
+						onChange={handleCategorySearchInput}
 					/>
 				</Form>
 				{/* <Navbar.Toggle /> */}
@@ -59,7 +85,7 @@ function NavbarComponent() {
 				</Navbar.Collapse>
 
 				<Navbar.Collapse className="justify-content-center">
-					<Link to="/login">
+					<Link to="/login" onClick={handleLogout}>
 						<GoSignOut />
 					</Link>
 				</Navbar.Collapse>
@@ -68,7 +94,7 @@ function NavbarComponent() {
 					<Navbar.Text className="text-light">
 						Signed in as:{' '}
 						<a href="#" className="text-danger">
-							Mark Otto
+							user01
 						</a>
 					</Navbar.Text>
 				</Navbar.Collapse>

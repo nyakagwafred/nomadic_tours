@@ -4,7 +4,7 @@ import { CartContext } from '../context/CartContext';
 import { useContext } from 'react';
 import { getTourData } from '../data/toursStore';
 import moneyFormatter from '../components/utils/CurrencyFormatter';
-import { AiFillDelete } from 'react-icons/ai';
+//import { AiFillDelete } from 'react-icons/ai';
 import { Container } from 'react-bootstrap';
 
 function CartProduct(props) {
@@ -26,7 +26,7 @@ function CartProduct(props) {
 					size="sm"
 					onClick={() => cart.deleteFromCart(id)}
 				>
-					<AiFillDelete />
+					Remove tour
 				</Button>
 				<hr></hr>
 			</Container>

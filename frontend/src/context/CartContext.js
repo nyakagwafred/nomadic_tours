@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContext, useState } from 'react';
-import { toursArray, getTourData } from '../data/toursStore';
+import { getTourData } from '../data/toursStore';
 
 export const CartContext = createContext({
 	items: [],
@@ -15,7 +15,6 @@ export function CartProvider({ children }) {
 	const [cartTours, setCartTours] = useState([]);
 
 	// [ { id: 1 , quantity: 3 }, { id: 2, quantity: 1 } ]
-
 	function getTourQuantity(id) {
 		const quantity = cartTours.find((element) => element.id === id);
 
@@ -28,7 +27,6 @@ export function CartProvider({ children }) {
 
 	function addOneToCart(id) {
 		const quantity = getTourQuantity(id);
-		console.log(`Quantity after adding to cart ${quantity}`);
 
 		if (quantity === 0) {
 			// product is not in cart
@@ -77,7 +75,7 @@ export function CartProvider({ children }) {
 		// [product1, product3]
 		setCartTours((cartTours) =>
 			cartTours.filter((currentProduct) => {
-				return currentProduct.id != id;
+				return currentProduct.id !== id;
 			}),
 		);
 	}

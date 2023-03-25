@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../utils/Loader';
 import { login, reset } from '../../features/auth/authSlice';
@@ -61,7 +61,8 @@ function Login() {
 							<Card.Body>
 								<div className="mb-3 mt-md-4">
 									<h2 className="fw-bold mb-2 text-center  text-success">
-										<img src="/images/tour.ico"></img> Nomadic Tours
+										<img src="/images/tour.ico" alt="Nomadic logo"></img>{' '}
+										Nomadic Tours
 									</h2>
 									<div className="mb-3">
 										{/* Start of form */}
@@ -101,6 +102,11 @@ function Login() {
 											</div>
 										</Form>
 										{/* End of Form */}
+										<div className="mt-3">
+											<p className="mb-0  text-center">
+												New user? <Link to="/">Register</Link>
+											</p>
+										</div>
 									</div>
 								</div>
 							</Card.Body>

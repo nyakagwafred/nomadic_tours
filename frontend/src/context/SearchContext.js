@@ -2,7 +2,10 @@ import React, { useReducer, createContext } from 'react';
 
 const initialState = {
 	isSearchBarOpen: false,
-	searchKeyword: '',
+	searchTour: '',
+	searchCategory: '',
+	isSearchTour: true,
+	isSearchCategory: false,
 };
 
 export const CommonStateContext = createContext();
@@ -16,10 +19,21 @@ const reducer = (state, action) => {
 				...state,
 				isSearchBarOpen: !state.isSearchBarOpen,
 			};
-		case 'SET_SEARCH_KEYWORD':
+		case 'SET_TOUR_SEARCH_KEYWORD':
 			return {
 				...state,
-				searchKeyword: action.payload.searchKeyword,
+				searchTour: action.payload.searchTour,
+				searchCategory: '',
+				isSearchTour: true,
+				isSearchCategory: false,
+			};
+		case 'SET_CATEGORY_SEARCH_KEYWORD':
+			return {
+				...state,
+				searchTour: '',
+				searchCategory: action.payload.searchCategory,
+				isSearchTour: false,
+				isSearchCategory: true,
 			};
 		default:
 			throw new Error(`Unknown action: ${action.type}`);
@@ -43,11 +57,22 @@ export const toggleSearchBar = (dispatch) => {
 	});
 };
 //Exported to header
-export const setSearchKeyword = (dispatch, searchKeyword) => {
+export const setSearchTour = (dispatch, searchTour) => {
 	return dispatch({
-		type: 'SET_SEARCH_KEYWORD',
+		type: 'SET_TOUR_SEARCH_KEYWORD',
 		payload: {
-			searchKeyword: searchKeyword,
+			searchTour: searchTour,
+			searchCategory: '',
+		},
+	});
+};
+
+export const setSearchCategory = (dispatch, searchCategory) => {
+	return dispatch({
+		type: 'SET_CATEGORY_SEARCH_KEYWORD',
+		payload: {
+			searchTour: '',
+			searchCategory: searchCategory,
 		},
 	});
 };

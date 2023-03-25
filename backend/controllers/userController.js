@@ -17,36 +17,23 @@ const authUser = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
 
 	try {
-		let user = await User.findOne({ email });
+		const user = await User.findOne({ email });
 
-		if (!user) {
-			return res.status(400).json({ errors: [{ msg: 'User not found' }] });
+		if (user && (await bcrypt.compare(password, user.password))) {
+			res.json({
+				_id: user.id,
+				name: user.name,
+				email: user.email,
+				admin: user.isAdmin,
+				createdAt: user.created_at,
+				token: generateToken(user._id),
+			});
+		} else {
+			res.status(401);
+			throw new Error('Wrong password');
 		}
-
-		const isMatch = await bcrypt.compare(password, user.password);
-
-		if (!isMatch) {
-			return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
-		}
-
-		const payload = {
-			user: {
-				id: user.id,
-			},
-		};
-
-		jwt.sign(
-			payload,
-			process.env.JWT_TOKEN,
-			{ expiresIn: '5 days' },
-			(err, token) => {
-				if (err) throw err;
-				res.json({ token });
-			},
-		);
 	} catch (err) {
-		console.log(err);
-		res.status(500).send('Server error');
+		res.status(400).json({ msg: 'Invalid Credentials' });
 	}
 });
 
@@ -83,10 +70,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
 		if (user) {
 			res.status(201).json({
-				_id: user.id,
 				name: user.name,
-				email: user.email,
-				admin: user.admin,
+				isAdmin: user.isAdmin,
 				token: generateToken(user._id),
 			});
 		} else {

@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router-dom';
+
 
 import axios from 'axios';
 
@@ -6,6 +8,7 @@ const API_URL = '/api/users/';
 
 // Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
+
 
 const initialState = {
 	user: user ? user : null,
@@ -20,11 +23,13 @@ export const register = createAsyncThunk(
 	'auth/register',
 	async (userData, thunkAPI) => {
 		try {
-            const response = await axios.post(API_URL + 'login', userData);
+            const response = await axios.post(API_URL, userData);
 
             if (response.data) {
                 localStorage.setItem('user', JSON.stringify(response.data));
             }
+
+			console.log(response.data)
         
             return response.data;
 		} catch (error) {
@@ -47,7 +52,9 @@ export const login = createAsyncThunk(
 
             if (response.data) {
                 localStorage.setItem('user', JSON.stringify(response.data));
-            }
+            } else {
+				console.log('Something went wrong')
+			}
 
 	    return response.data;
 	} catch (error) {
@@ -55,6 +62,7 @@ export const login = createAsyncThunk(
 			(error.response && error.response.data && error.response.data.message) ||
 			error.message ||
 			error.toString();
+			console.log(message)
 		return thunkAPI.rejectWithValue(message);
 	}
 });
@@ -62,6 +70,7 @@ export const login = createAsyncThunk(
 // Logout user
 export const logout = createAsyncThunk('auth/logout', async () => {
 	localStorage.removeItem('user');
+	
 });
 
 export const authSlice = createSlice({

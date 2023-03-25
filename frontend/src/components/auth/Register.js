@@ -28,7 +28,11 @@ function Register() {
 
 	useEffect(() => {
 		if (isError) {
-			alert(message);
+			//alert(message);
+			toast.error(message, {
+				position: toast.POSITION.TOP_CENTER,
+				autoClose: 5000,
+			});
 		}
 		if (isSuccess || user) {
 			navigate('/home');
@@ -55,7 +59,6 @@ function Register() {
 			const userData = { email, password, password2, name };
 			dispatch(register(userData));
 		}
-		console.log(name);
 	};
 
 	if (isLoading) {

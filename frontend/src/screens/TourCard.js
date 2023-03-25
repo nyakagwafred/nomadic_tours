@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
@@ -34,14 +34,23 @@ function TourCard({ tour }) {
 					</Card.Title>
 				</Link>
 				<Card.Text as="div">
-					<div className="my-3">{tour.tour_brief}</div>
+					<div className="my-3">
+						Category <Badge bg="success">{tour.category}</Badge>
+					</div>
+					<hr></hr>
+				</Card.Text>
+				<Card.Text as="div">
+					<div style={{ color: '#1B3D6C' }}>{tour.tour_brief}</div>
 				</Card.Text>
 				<Card.Text as="div">
 					<div className="my-3">
 						{tour.rating} from {tour.num_reviews} reviews{' '}
 					</div>
 				</Card.Text>
-				<Card.Text as="h5">{moneyFormatter.format(tour.price)}</Card.Text>
+				<hr></hr>
+				<Card.Text as="h5" className="text-center">
+					{moneyFormatter.format(tour.price)}
+				</Card.Text>
 				{tourQuantity > 0 ? (
 					<>
 						<Button
