@@ -1,7 +1,7 @@
 import { uuid } from 'uuidv4';
 const toursArray = [
 	{
-		id: uuid(),
+		id: 1,
 		price: 2000,
 		image: '/images/cheetah.jpg',
 		country: 'Kenya',
@@ -15,7 +15,7 @@ const toursArray = [
 		category: ' Mountain',
 	},
 	{
-		id: uuid(),
+		id: 2,
 		price: 3000,
 		image: '/images/ballon.jpg',
 		country: 'Kenya',
@@ -29,7 +29,7 @@ const toursArray = [
 		category: 'Savanna',
 	},
 	{
-		id: uuid(),
+		id: 3,
 		price: 4000,
 		image: '/images/tree.jpg',
 		country: 'Kenya',
@@ -43,7 +43,7 @@ const toursArray = [
 		category: 'Mountains',
 	},
 	{
-		id: uuid(),
+		id: 4,
 		price: 5000,
 		image: '/images/van.jpg',
 		country: 'Kenya',
@@ -57,7 +57,7 @@ const toursArray = [
 		category: 'Ocean and Lakes',
 	},
 	{
-		id: uuid(),
+		id: 5,
 		price: 10000,
 		image: '/images/van.jpg',
 		country: 'Uganda',
@@ -71,7 +71,7 @@ const toursArray = [
 		category: 'Ocean and Lakes',
 	},
 	{
-		id: uuid(),
+		id: 6,
 		price: 5000,
 		image: '/images/tree.jpg',
 		country: 'Tanzania',
@@ -85,7 +85,7 @@ const toursArray = [
 		category: 'Ocean and Lakes',
 	},
 	{
-		id: uuid(),
+		id: 7,
 		price: 25000,
 		image: '/images/van.jpg',
 		country: 'Tanzania',
@@ -99,7 +99,7 @@ const toursArray = [
 		category: 'Ocean and Lakes',
 	},
 	{
-		id: uuid(),
+		id: 8,
 		price: 5000,
 		image: '/images/ballon.jpg',
 		country: 'Kenya',

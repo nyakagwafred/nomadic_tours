@@ -11,7 +11,7 @@ function TourCard({ tour }) {
 
 	return (
 		<Card className="mt-5">
-			<Link to={`/tour/${tour._id}`}>
+			<Link to={`/tour/${tour.id}`}>
 				<Card.Img
 					src={tour.image}
 					variant="top"
@@ -24,7 +24,7 @@ function TourCard({ tour }) {
 
 			<Card.Body>
 				<Link
-					to={`/tour/${tour._id}`}
+					to={`/tour/${tour.id}`}
 					className="text-monospace text-decoration-none text-success"
 				>
 					<Card.Title as="div">
@@ -43,16 +43,30 @@ function TourCard({ tour }) {
 				</Card.Text>
 				<Card.Text as="h5">{moneyFormatter.format(tour.price)}</Card.Text>
 				{tourQuantity > 0 ? (
-					<Button
-						variant="danger"
-						onClick={() => cart.deleteFromCart(tour.id)}
-						className="my-2"
-					>
-						Remove from cart
-					</Button>
+					<>
+						<Button
+							variant="danger"
+							onClick={() => cart.deleteFromCart(tour.id)}
+							style={{
+								alignItems: 'center',
+								width: '100%',
+								marginHorizontal: 20,
+							}}
+						>
+							Remove from Cart
+						</Button>
+					</>
 				) : (
-					<Button variant="dark" onClick={() => cart.addOneToCart(tour.id)}>
-						Add To Cart
+					<Button
+						variant="dark"
+						onClick={() => cart.addOneToCart(tour.id)}
+						style={{
+							alignItems: 'center',
+							width: '100%',
+							marginHorizontal: 20,
+						}}
+					>
+						Add to Cart
 					</Button>
 				)}
 			</Card.Body>

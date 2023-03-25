@@ -2,65 +2,88 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
-//import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { toursArray } from '../data/toursStore';
+import { useParams } from 'react-router-dom';
+import moneyFormatter from '../components/utils/CurrencyFormatter';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
-import Loader from '../components/utils/Loader';
-import Message from '../components/utils/Message';
-
-function TourScreen({ history, match }) {
+function TourScreen({}) {
+	const { id } = useParams();
+	const tour = toursArray.find((element) => element.id == id);
+	const cart = useContext(CartContext);
+	const tourQuantity = cart.getTourQuantity(tour.id);
 	return (
 		<div>
 			<Header />
-			<Container>
-				<Link className="btn btn-dark my-3" to="/home">
-					Go Back
-				</Link>
-
-				{/* {isLoading ? (
-					<Loader />
-				) : isError ? (
-					<Message variant="danger">Sorry! Try to reload.</Message>
-				) : (
-					<>
-						<Row>
-							<Col md={6}>
+			<Container className="mt-5">
+				<Row>
+					<Col md={6}>
+						<ListGroup variant="flush">
+							<ListGroup.Item>
 								<Image src={tour.image} fluid />
-							</Col>
-							<Col md={6}>
-								<ListGroup variant="flush">
-									<ListGroup.Item>
-										<h2>
-											Book <strong>{tour.tour_name}</strong> for {tour.duration}{' '}
-											Days
-										</h2>
-									</ListGroup.Item>
-									<ListGroup.Item>
-										<h5>{tour.tour_desc}</h5>
-									</ListGroup.Item>
-									<ListGroup.Item>
-										<h5>
-											Rating {tour.rating} of {tour.num_reviews} reviews
-										</h5>
-									</ListGroup.Item>
-									<ListGroup.Item>
-										<h5>KES {tour.price}</h5>
-									</ListGroup.Item>
-									<ListGroup.Item>
+							</ListGroup.Item>
+							<ListGroup.Item>
+								<Link className="btn btn-dark " to="/home">
+									Back to Tour List
+								</Link>
+							</ListGroup.Item>
+						</ListGroup>
+					</Col>
+
+					<Col md={6}>
+						<ListGroup variant="flush">
+							<ListGroup.Item>
+								<h2>
+									Book <strong>{tour.tour_name}</strong> for {tour.duration}{' '}
+									Days
+								</h2>
+							</ListGroup.Item>
+							<ListGroup.Item>
+								<h5>{tour.tour_desc}</h5>
+							</ListGroup.Item>
+							<ListGroup.Item>
+								<h5>
+									Rating {tour.rating} of {tour.num_reviews} reviews
+								</h5>
+							</ListGroup.Item>
+							<ListGroup.Item>
+								<h5>{moneyFormatter.format(tour.price)}</h5>
+							</ListGroup.Item>
+							<ListGroup.Item>
+								{tourQuantity > 0 ? (
+									<>
 										<Button
-											onClick={addToCartHandler}
-											className="btn btn-block btn-dark w-100"
-											type="buttone"
-											to="/home"
+											variant="danger"
+											onClick={() => cart.deleteFromCart(tour.id)}
+											style={{
+												alignItems: 'center',
+												width: '100%',
+												marginHorizontal: 20,
+											}}
 										>
-											Add To Cart
+											Remove from Cart
 										</Button>
-									</ListGroup.Item>
-								</ListGroup>
-							</Col>
-						</Row>
-					</>
-				)} */}
+									</>
+								) : (
+									<Button
+										variant="dark"
+										onClick={() => cart.addOneToCart(tour.id)}
+										style={{
+											alignItems: 'center',
+											width: '100%',
+											marginHorizontal: 20,
+										}}
+									>
+										Add to Cart
+									</Button>
+								)}
+							</ListGroup.Item>
+						</ListGroup>
+					</Col>
+				</Row>
 			</Container>
 			<Footer />
 		</div>

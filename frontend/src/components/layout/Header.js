@@ -7,16 +7,21 @@ import CartProduct from '../../screens/CartProduct';
 import moneyFormatter from '../utils/CurrencyFormatter';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { GoSignOut } from 'react-icons/go';
+import {
+	CommonDispatchContext,
+	setSearchKeyword,
+} from '../../context/SearchContext';
 
 function NavbarComponent() {
 	const cart = useContext(CartContext);
+	const commonDispatch = useContext(CommonDispatchContext);
 	const [show, setShow] = useState(false);
+	//Header click and input handler functions
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-
-	function checkout() {
-		console.log('Checking out....');
-	}
+	const handleSearchInput = (event) => {
+		return setSearchKeyword(commonDispatch, event.target.value);
+	};
 
 	const toursCount = cart.items.reduce((sum, tour) => sum + tour.quantity, 0);
 
@@ -32,6 +37,7 @@ function NavbarComponent() {
 						placeholder="Search tours"
 						className="me-2"
 						aria-label="#"
+						onChange={handleSearchInput}
 					/>
 					<Button variant="outline-success">Search</Button>
 				</Form>

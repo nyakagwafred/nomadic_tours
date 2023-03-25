@@ -17,17 +17,18 @@ export function CartProvider({ children }) {
 	// [ { id: 1 , quantity: 3 }, { id: 2, quantity: 1 } ]
 
 	function getTourQuantity(id) {
-		const quantity = cartTours.find((product) => product.id === id);
+		const quantity = cartTours.find((element) => element.id === id);
 
 		if (quantity === undefined) {
 			return 0;
+		} else {
+			return 1;
 		}
-
-		return quantity;
 	}
 
 	function addOneToCart(id) {
 		const quantity = getTourQuantity(id);
+		console.log(`Quantity after adding to cart ${quantity}`);
 
 		if (quantity === 0) {
 			// product is not in cart
@@ -38,6 +39,7 @@ export function CartProvider({ children }) {
 					quantity: 1,
 				},
 			]);
+			console.log(cartTours);
 		} else {
 			// product is in cart
 			// [ { id: 1 , quantity: 3 }, { id: 2, quantity: 1 } ]    add to product id of 2
