@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Badge } from 'react-bootstrap';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
@@ -38,11 +38,16 @@ function TourScreen({}) {
 							<ListGroup.Item>
 								<h2>
 									Book <strong>{tour.tour_name}</strong> for {tour.duration}{' '}
-									Days
+									Days <Badge bg="success">{tour.category}</Badge>
 								</h2>
 							</ListGroup.Item>
 							<ListGroup.Item>
-								<h5>{tour.tour_desc}</h5>
+								<h5>
+									Country: <Badge bg="success">{tour.country}</Badge>
+								</h5>
+							</ListGroup.Item>
+							<ListGroup.Item>
+								<h5>{tour.tour_brief}</h5>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<h5>

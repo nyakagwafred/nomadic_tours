@@ -6,7 +6,7 @@ const toursArray = [
 		country: 'Uganda',
 		tour_name: 'Kampala',
 		tour_brief:
-			'Kampala is the capital and largest city of Uganda. The city proper has a population of 1,680,000[6] and is divided into the five political divisions of Kampala Central Division, Kawempe Division, Makindye Division, Nakawa Division, and Rubaga Division',
+			'Kampala is the capital and largest city of Uganda. The city proper has a population of 1,680,000[6] and is divided into the five political divisions of Kampala Central Division, Kawempe Division, Makindye Division, Nakawa Division, and Rubaga Division.',
 		tour_desc:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mattis non mauris et viverra. Sed vel orci elit. Aenean fringilla, ante porttitor semper facilisis, arcu turpis gravida arcu, nec mollis leo tellus a tortor.',
 		num_reviews: 12,
@@ -51,7 +51,7 @@ const toursArray = [
 		country: 'Kenya',
 		tour_name: 'Marsabit',
 		tour_brief:
-			'Marsabit is a town in the northern Marsabit County in Kenya. It is situated in the former Eastern Province and is almost surrounded by the Marsabit National Park. The town is located 170 kilometres (110 mi) east of the centre of the East African Rift ',
+			'Marsabit is a town in the northern Marsabit County in Kenya. It is situated in the former Eastern Province and is almost surrounded by the Marsabit National Park. The town is located 170 kilometres (110 mi) east of the centre of the East African Rift.',
 		tour_desc:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mattis non mauris et viverra. Sed vel orci elit. Aenean fringilla, ante porttitor semper facilisis, arcu turpis gravida arcu, nec mollis leo tellus a tortor.',
 		num_reviews: 2,

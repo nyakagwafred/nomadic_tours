@@ -3,6 +3,7 @@ import TourCard from './TourCard';
 import { Row, Col } from 'react-bootstrap';
 import { toursArray } from '../data/toursStore';
 import { CommonStateContext } from '../context/SearchContext';
+import Message from '../components/utils/Message';
 
 function CategorySearch() {
 	const { searchCategory } = useContext(CommonStateContext);
@@ -20,7 +21,10 @@ function CategorySearch() {
 		return (
 			<>
 				<h1 className="vh-100 d-flex justify-content-center align-items-center">
-					No tour categories in this search. Try again with a different keyword.
+					<Message>
+						No tour categories in this search. Try again with a different
+						keyword.
+					</Message>
 				</h1>
 			</>
 		);

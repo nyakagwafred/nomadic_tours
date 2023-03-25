@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../utils/Loader';
 import { login, reset } from '../../features/auth/authSlice';
+import Message from '../../components/utils/Message';
 
 function Login() {
 	const [formData, setFormData] = useState({
@@ -24,7 +26,10 @@ function Login() {
 
 	useEffect(() => {
 		if (isError) {
-			alert(message);
+			toast.error('Invalid credentials. Try Again', {
+				position: toast.POSITION.TOP_CENTER,
+				autoClose: 8000,
+			});
 		}
 
 		if (isSuccess || user) {
@@ -57,6 +62,7 @@ function Login() {
 			<Container>
 				<Row className="vh-100 d-flex justify-content-center align-items-center">
 					<Col md={8} lg={6} xs={12}>
+						{isError && <Message>Wrong Credentials</Message>}
 						<Card className="px-5">
 							<Card.Body>
 								<div className="mb-3 mt-md-4">
@@ -114,6 +120,7 @@ function Login() {
 					</Col>
 				</Row>
 			</Container>
+			<ToastContainer />
 		</div>
 	);
 }

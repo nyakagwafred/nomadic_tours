@@ -6,6 +6,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CartProvider from './context/CartContext.js';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

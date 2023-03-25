@@ -3,6 +3,7 @@ import TourCard from './TourCard';
 import { Row, Col } from 'react-bootstrap';
 import { toursArray } from '../data/toursStore';
 import { CommonStateContext } from '../context/SearchContext';
+import Message from '../components/utils/Message';
 
 function TourSearch() {
 	const { searchTour } = useContext(CommonStateContext);
@@ -19,7 +20,9 @@ function TourSearch() {
 		return (
 			<>
 				<h1 className="vh-100 d-flex justify-content-center align-items-center">
-					No tour search results. Try again with different keywords
+					<Message>
+						No tour search results. Try again with different keywords
+					</Message>
 				</h1>
 			</>
 		);

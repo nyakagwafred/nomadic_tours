@@ -28,7 +28,6 @@ function Register() {
 
 	useEffect(() => {
 		if (isError) {
-			//alert(message);
 			toast.error(message, {
 				position: toast.POSITION.TOP_CENTER,
 				autoClose: 5000,
@@ -51,7 +50,7 @@ function Register() {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		if (password !== password2) {
-			toast.error('Passwords do not match', {
+			toast.error('Passwords do not match. Try again', {
 				position: toast.POSITION.TOP_CENTER,
 				autoClose: 3000,
 			});

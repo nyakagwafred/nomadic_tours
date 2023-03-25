@@ -6,6 +6,7 @@ import { CartContext } from '../../context/CartContext';
 import CartProduct from '../../screens/CartProduct';
 import moneyFormatter from '../utils/CurrencyFormatter';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { FaUserCheck } from 'react-icons/fa';
 import {
 	CommonDispatchContext,
 	setSearchTour,
@@ -87,8 +88,9 @@ function NavbarComponent() {
 
 				<Navbar.Collapse>
 					<Navbar.Text className="text-light">
-						Signed in as:{' '}
-						<a href="#" className="text-success">
+						<FaUserCheck />
+						{'    '}
+						<a href="/home" className="text-success">
 							{name}
 						</a>
 					</Navbar.Text>
@@ -119,7 +121,15 @@ function NavbarComponent() {
 							<hr></hr>
 
 							<Link to="/paypal">
-								<button type="button" className="btn btn-success">
+								<button
+									type="button"
+									style={{
+										alignItems: 'center',
+										width: '100%',
+										marginHorizontal: 20,
+									}}
+									className="btn btn-success"
+								>
 									Proceed to payment
 								</button>
 							</Link>
