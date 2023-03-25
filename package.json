@@ -4,6 +4,11 @@
   "description": "Nomadic Tours Backend",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "16.x",
+    "npm": "7.x"
+
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon backend/server",
