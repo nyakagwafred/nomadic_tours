@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import moneyFormatter from '../components/utils/CurrencyFormatter';
-
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 
 function TourCard({ tour }) {
