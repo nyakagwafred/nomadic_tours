@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { getTourData } from '../data/ToursStore';
 import moneyFormatter from '../components/utils/CurrencyFormatter';
 import { AiFillDelete } from 'react-icons/ai';
+import { IoPersonAdd, IoPersonRemove } from 'react-icons/io5';
 import { Container } from 'react-bootstrap';
 import { Col, Row } from 'react-bootstrap';
 import { Tooltip } from 'react-tooltip';
@@ -19,16 +20,18 @@ function CartProduct(props) {
 		<>
 			<Container>
 				<Row>
-					<Col sm={8}>
+					{/* Product catalog in cart */}
+					<Col sm={6}>
 						To {tourData.tour_name} at{' '}
 						<u>{moneyFormatter.format(quantity * tourData.price)}</u> for{' '}
 						{tourData.duration} days.
 					</Col>
-					<Col sm={4}>
+					{/* Remove tour from cart */}
+					<Col sm={2}>
 						<Button
 							variant="danger"
 							size="sm"
-							onClick={() => cart.deleteFromCart(id)}
+							onClick={() => cart.removeFromCart(id)}
 						>
 							{' '}
 							<a
@@ -36,6 +39,38 @@ function CartProduct(props) {
 								data-tooltip-content="Remove item from cart"
 							>
 								<AiFillDelete />
+							</a>
+						</Button>
+					</Col>
+					{/* Add a person to tour. */}
+					<Col sm={2}>
+						<Button
+							variant="success"
+							size="sm"
+							onClick={() => cart.removeOneFromCart(id)}
+						>
+							{' '}
+							<a
+								data-tooltip-id="my-tooltip"
+								data-tooltip-content="Remove a person from this trip"
+							>
+								<IoPersonRemove />
+							</a>
+						</Button>
+					</Col>
+					{/* Remove a person from tour. */}
+					<Col sm={2}>
+						<Button
+							variant="success"
+							size="sm"
+							onClick={() => cart.addOneToCart(id)}
+						>
+							{' '}
+							<a
+								data-tooltip-id="my-tooltip"
+								data-tooltip-content="Add a person to this trip"
+							>
+								<IoPersonAdd />
 							</a>
 						</Button>
 					</Col>

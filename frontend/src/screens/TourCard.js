@@ -36,7 +36,7 @@ function TourCard({ tour }) {
 					<hr></hr>
 				</Link>
 				<Card.Text as="div">
-					<div className="my-3">
+					<div className="my-3 text-center">
 						Category <Badge bg="success">{tour.category}</Badge>
 					</div>
 					<hr></hr>
@@ -68,7 +68,7 @@ function TourCard({ tour }) {
 					<>
 						<Button
 							variant="danger"
-							onClick={() => cart.deleteFromCart(tour.id)}
+							onClick={() => cart.removeFromCart(tour.id)}
 							style={{
 								alignItems: 'center',
 								width: '100%',
@@ -81,7 +81,7 @@ function TourCard({ tour }) {
 				) : (
 					<Button
 						variant="dark"
-						onClick={() => cart.addOneToCart(tour.id)}
+						onClick={() => cart.addToCart(tour.id)}
 						style={{
 							alignItems: 'center',
 							width: '100%',

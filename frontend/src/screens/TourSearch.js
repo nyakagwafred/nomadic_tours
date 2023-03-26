@@ -1,21 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import TourCard from './TourCard';
 import { Row, Col } from 'react-bootstrap';
-import { toursArray } from '../data/ToursStore';
+//import { products } from '../data/ToursStore';
 import { CommonStateContext } from '../context/SearchContext';
 import Message from '../components/utils/Message';
 
+import {
+	ProductsStateContext,
+	ProductsDispatchContext,
+	getProducts,
+} from '../context/ProductContext';
+
 function TourSearch() {
 	const { searchTour } = useContext(CommonStateContext);
+	const { products, isLoading, isLoaded } = useContext(ProductsStateContext);
+	const dispatch = useContext(ProductsDispatchContext);
 
 	let toursList =
-		toursArray &&
-		toursArray.filter((tour) => {
+		products &&
+		products.filter((tour) => {
 			return (
 				tour.tour_name.toLowerCase().includes(searchTour.toLowerCase()) ||
 				!searchTour
 			);
 		});
+
+	useEffect(() => {
+		getProducts(dispatch);
+	}, []);
+
+	console.log(products[0]);
+
 	if (toursList == 0) {
 		return (
 			<>
