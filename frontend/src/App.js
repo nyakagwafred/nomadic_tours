@@ -7,25 +7,28 @@ import TourScreen from './screens/TourScreen';
 import PayPal from './payments/PayPal';
 import CommonProvider from './context/SearchContext';
 import ProductProvider from './context/ProductContext';
+import CartProvider from './context/TestCartContext';
 
 function App() {
 	return (
-		<ProductProvider>
-			<CommonProvider>
-				<Router>
-					<Fragment>
-						<Routes>
-							<Route path="/" exact element={<Register />} />
-							<Route path="/home" exact element={<HomeScreen />} />
-							<Route path="/login" exact element={<Login />} />
-							<Route path="/paypal" exact element={<PayPal />} />
-							<Route path="/tour/:id" exact element={<TourScreen />} />
-							<Route path="/cart/:id?" exact element={<TourScreen />} />
-						</Routes>
-					</Fragment>
-				</Router>
-			</CommonProvider>
-		</ProductProvider>
+		<CartProvider>
+			<ProductProvider>
+				<CommonProvider>
+					<Router>
+						<Fragment>
+							<Routes>
+								<Route path="/" exact element={<Register />} />
+								<Route path="/home" exact element={<HomeScreen />} />
+								<Route path="/login" exact element={<Login />} />
+								<Route path="/paypal" exact element={<PayPal />} />
+								<Route path="/tour/:id" exact element={<TourScreen />} />
+								<Route path="/cart/:id?" exact element={<TourScreen />} />
+							</Routes>
+						</Fragment>
+					</Router>
+				</CommonProvider>
+			</ProductProvider>
+		</CartProvider>
 	);
 }
 

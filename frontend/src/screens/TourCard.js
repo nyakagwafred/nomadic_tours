@@ -1,14 +1,48 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Card, Button, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import {
+	CartDispatchContext,
+	addToCart,
+	removeFromCart,
+} from '../context/TestCartContext';
 import moneyFormatter from '../components/utils/CurrencyFormatter';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 
 function TourCard({ tour }) {
+	//Old context API
 	const cart = useContext(CartContext);
 	const tourQuantity = cart.getTourQuantity(tour.id);
+	//New context API
+	const [isAdded, setIsAdded] = useState(false);
+	const dispatch = useContext(CartDispatchContext);
+	//Destructure the tour object
+	const {
+		image,
+		name,
+		price,
+		_id,
+		category,
+		tour_brief,
+		duration,
+		num_reviews,
+	} = tour;
+
+	const handleAddToCart = () => {
+		const product = { ...tour, quantity: 1, people: 1 };
+		addToCart(dispatch, product);
+		setIsAdded(true);
+		// setTimeout(() => {
+		// 	setIsAdded(false);
+		// }, 2500);
+	};
+
+	const handleRemoveFromCart = () => {
+		removeFromCart(dispatch, _id);
+		setIsAdded(false);
+		console.log('handle remove from cart');
+	};
 
 	return (
 		<Card className="mt-5">
@@ -64,24 +98,23 @@ function TourCard({ tour }) {
 					{moneyFormatter.format(tour.price)}
 				</Card.Text>
 				<hr></hr>
-				{tourQuantity > 0 ? (
-					<>
-						<Button
-							variant="danger"
-							onClick={() => cart.removeFromCart(tour.id)}
-							style={{
-								alignItems: 'center',
-								width: '100%',
-								marginHorizontal: 20,
-							}}
-						>
-							Remove from Cart
-						</Button>
-					</>
+
+				{isAdded ? (
+					<Button
+						variant="danger"
+						onClick={handleRemoveFromCart}
+						style={{
+							alignItems: 'center',
+							width: '100%',
+							marginHorizontal: 20,
+						}}
+					>
+						Remove from Cart
+					</Button>
 				) : (
 					<Button
 						variant="dark"
-						onClick={() => cart.addToCart(tour.id)}
+						onClick={handleAddToCart}
 						style={{
 							alignItems: 'center',
 							width: '100%',

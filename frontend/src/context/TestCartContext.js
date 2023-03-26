@@ -17,7 +17,8 @@ const reducer = (state, action) => {
 				isCartOpen: !state.isCartOpen,
 			};
 		case 'ADD_TOUR_TO_CART':
-			const id = action.payload.cartItem.id;
+			const id = action.payload.cartItem._id;
+			console.log(id);
 			const isOld = state.tours.map((tour) => tour.id).includes(id);
 			let cartItems = null;
 			if (isOld) {
@@ -42,7 +43,7 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				tours: state.tours.filter(
-					(tour) => tour.id !== action.payload.cartItemId,
+					(tour) => tour._id !== action.payload.cartItemId,
 				),
 			};
 		case 'CLEAR_CART':

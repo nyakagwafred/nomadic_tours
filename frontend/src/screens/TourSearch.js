@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from 'react';
 import TourCard from './TourCard';
-import { Row, Col } from 'react-bootstrap';
-//import { products } from '../data/ToursStore';
+import { Row, Col, Container } from 'react-bootstrap';
 import { CommonStateContext } from '../context/SearchContext';
 import Message from '../components/utils/Message';
+import Spinner from 'react-bootstrap/Spinner';
 
 import {
 	ProductsStateContext,
@@ -13,7 +13,7 @@ import {
 
 function TourSearch() {
 	const { searchTour } = useContext(CommonStateContext);
-	const { products, isLoading, isLoaded } = useContext(ProductsStateContext);
+	const { products, isLoading } = useContext(ProductsStateContext);
 	const dispatch = useContext(ProductsDispatchContext);
 
 	let toursList =
@@ -29,7 +29,15 @@ function TourSearch() {
 		getProducts(dispatch);
 	}, []);
 
-	console.log(products[0]);
+	if (isLoading) {
+		return (
+			<Container>
+				<Row className="vh-100 d-flex justify-content-center align-items-center">
+					<Spinner animation="border" />
+				</Row>
+			</Container>
+		);
+	}
 
 	if (toursList == 0) {
 		return (
