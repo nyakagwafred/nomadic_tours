@@ -5,6 +5,9 @@ import colors from 'colors';
 import userRoutes from './routes/userRoutes.js';
 import tourRoutes from './routes/tourRoutes.js';
 import orderRoutes from './routes/tourRoutes.js';
+import path from 'path';
+
+//Initialize express
 const app = express();
 dotenv.config();
 
