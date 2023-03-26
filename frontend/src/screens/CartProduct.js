@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { CartContext } from '../context/CartContext';
 import { useContext } from 'react';
-import { getTourData } from '../data/toursStore';
+import { getTourData } from '../data/ToursStore';
 import moneyFormatter from '../components/utils/CurrencyFormatter';
 import { AiFillDelete } from 'react-icons/ai';
 import { Container } from 'react-bootstrap';

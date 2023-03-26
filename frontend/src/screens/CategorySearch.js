@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import TourCard from './TourCard';
 import { Row, Col } from 'react-bootstrap';
-import { toursArray } from '../data/toursStore';
+import { toursArray } from '../data/ToursStore';
 import { CommonStateContext } from '../context/SearchContext';
 import Message from '../components/utils/Message';
 
