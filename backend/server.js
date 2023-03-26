@@ -7,7 +7,7 @@ import tourRoutes from './routes/tourRoutes.js';
 import orderRoutes from './routes/tourRoutes.js';
 import path from 'path';
 
-//Initialize express
+//Initialize express and set environment variables
 const app = express();
 dotenv.config();
 
@@ -20,17 +20,14 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes for user model
 app.use('/api/users', userRoutes);
-app.use('/api/tours', tourRoutes);
-app.use('/api/orders', orderRoutes);
-
 // Routes for tour model
-app.get('/', (req, res) => {
-	res.send('API is running');
-});
+app.use('/api/tours', tourRoutes);
+
+//TODO
+//app.use('/api/orders', orderRoutes);
 
 // Serve static assets in production
 const __dirname = path.resolve();
-//app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '/frontend/build')));
@@ -43,7 +40,7 @@ if (process.env.NODE_ENV === 'production') {
 		res.send('API is running....');
 	});
 }
-//
+//Environment variable
 const PORT = process.env.PORT || 5000;
 
 app.listen(
