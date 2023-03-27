@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import TourCard from './TourCard';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { toursArray } from '../data/ToursStore';
 import { CommonStateContext } from '../context/SearchContext';
 import Message from '../components/utils/Message';
@@ -19,11 +19,15 @@ function TourSearch() {
 	if (toursList == 0) {
 		return (
 			<>
-				<h1 className="vh-100 d-flex justify-content-center align-items-center">
-					<Message>
-						No tour search results. Try again with different keywords
-					</Message>
-				</h1>
+				<Container>
+					<Row className="vh-100 d-flex justify-content-center align-items-center">
+						<Col md={8} lg={6} xs={12}>
+							<Message>
+								No results in this search. Try with another keyword.
+							</Message>
+						</Col>
+					</Row>
+				</Container>
 			</>
 		);
 	}

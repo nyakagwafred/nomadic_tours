@@ -15,6 +15,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout, reset } from '../../features/auth/authSlice';
+import Message from '../utils/Message';
 
 function NavbarComponent() {
 	const navigate = useNavigate();
@@ -99,13 +100,15 @@ function NavbarComponent() {
 			<hr></hr>
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Shopping Cart</Modal.Title>
+					<Modal.Title>
+						<Message variant="success">
+							Your Shopping Cart. Review and update
+						</Message>
+					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					{toursCount > 0 ? (
 						<>
-							<h2>Tours in your cart:</h2>
-							<hr></hr>
 							{cart.items.map((currentProduct, idx) => (
 								<CartProduct
 									key={idx}
@@ -135,7 +138,9 @@ function NavbarComponent() {
 							</Link>
 						</>
 					) : (
-						<h2 className="text-danger">There are no items in your cart!</h2>
+						<Message>
+							No items in your cart. Check the listings and book your tour.
+						</Message>
 					)}
 				</Modal.Body>
 			</Modal>
