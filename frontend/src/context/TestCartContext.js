@@ -16,17 +16,17 @@ const reducer = (state, action) => {
 				...state,
 				isCartOpen: !state.isCartOpen,
 			};
+		/*************************************** */
 		case 'ADD_TOUR_TO_CART':
-			const id = action.payload.cartItem._id;
-			console.log(id);
-			const isOld = state.tours.map((tour) => tour.id).includes(id);
+			let id = action.payload.cartItem._id;
+			let isOld = state.tours.map((tour) => tour.id).includes(id);
 			let cartItems = null;
 			if (isOld) {
 				const tours = state.tours.map((tour) => {
 					if (tour.id === id) {
 						return {
 							...tour,
-							quantity: tour.quantity + 1,
+							quantity: 1,
 						};
 					}
 					return tour;
@@ -39,6 +39,56 @@ const reducer = (state, action) => {
 				...state,
 				tours: cartItems,
 			};
+		/*************************************** */
+		case 'ADD_ONE_TO_TOUR':
+			id = action.payload.cartItemId;
+			console.log(id);
+
+			isOld = state.tours.map((tour) => tour.id).includes(id);
+			cartItems = null;
+			if (isOld) {
+				const tours = state.tours.map((tour) => {
+					if (tour.id === id) {
+						return {
+							...tour,
+							tourists: tour.tourists + 1,
+						};
+					}
+					return tour;
+				});
+				cartItems = [...tours];
+			} else {
+				cartItems = [...state.tours, action.payload.cartItem];
+			}
+			return {
+				...state,
+				tours: cartItems,
+			};
+		/*************************************** */
+		case 'REMOVE_ONE_FROM_TOUR':
+			id = action.payload.cartItemId;
+
+			isOld = state.tours.map((tour) => tour.id).includes(id);
+			cartItems = null;
+			if (isOld) {
+				const tours = state.tours.map((tour) => {
+					if (tour.id === id) {
+						return {
+							...tour,
+							people: tour.tourists - 1,
+						};
+					}
+					return tour;
+				});
+				cartItems = [...tours];
+			} else {
+				cartItems = [...state.tours, action.payload.cartItem];
+			}
+			return {
+				...state,
+				tours: cartItems,
+			};
+		/*************************************** */
 		case 'REMOVE_TOUR_FROM_CART':
 			return {
 				...state,
@@ -46,6 +96,7 @@ const reducer = (state, action) => {
 					(tour) => tour._id !== action.payload.cartItemId,
 				),
 			};
+		/*************************************** */
 		case 'CLEAR_CART':
 			return {
 				...state,
@@ -55,13 +106,14 @@ const reducer = (state, action) => {
 			throw new Error(`Unknown action: ${action.type}`);
 	}
 };
-
+/*******************************************************/
+//Actions to manage state
 export const toggleCartPopup = (dispatch) => {
 	return dispatch({
 		type: 'TOGGLE_CART_POPUP',
 	});
 };
-
+//Add a tour to cart
 export const addToCart = (dispatch, cartItem) => {
 	return dispatch({
 		type: 'ADD_TOUR_TO_CART',
@@ -70,10 +122,28 @@ export const addToCart = (dispatch, cartItem) => {
 		},
 	});
 };
-
+//Remove a tour from cart
 export const removeFromCart = (dispatch, cartItemId) => {
 	return dispatch({
 		type: 'REMOVE_TOUR_FROM_CART',
+		payload: {
+			cartItemId: cartItemId,
+		},
+	});
+};
+//Add a person to a tour
+export const addOneToCart = (dispatch, cartItemId) => {
+	return dispatch({
+		type: 'ADD_ONE_TO_TOUR',
+		payload: {
+			cartItemId: cartItemId,
+		},
+	});
+};
+//Remove a person from a tour
+export const removeOneFromCart = (dispatch, cartItemId) => {
+	return dispatch({
+		type: 'REMOVE_ONE_FROM_TOUR',
 		payload: {
 			cartItemId: cartItemId,
 		},

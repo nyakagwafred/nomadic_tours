@@ -12,14 +12,21 @@ import {
 	setSearchTour,
 	setSearchCategory,
 } from '../../context/SearchContext';
+import {
+	CartDispatchContext,
+	CartStateContext,
+	removeFromCart,
+	addToCart,
+} from '../../context/TestCartContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout, reset } from '../../features/auth/authSlice';
+import Message from '../utils/Message';
 
 function NavbarComponent() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const cart = useContext(CartContext);
+
 	const commonDispatch = useContext(CommonDispatchContext);
 	const [show, setShow] = useState(false);
 	const { user } = useSelector((state) => state.auth);
@@ -37,10 +44,9 @@ function NavbarComponent() {
 		console.log(`Category keyword is ....${event.target.value}`);
 		return setSearchCategory(commonDispatch, event.target.value);
 	};
-
-	const toursCount = cart.items.reduce((sum, tour) => sum + tour.quantity, 0);
-
-	const toursBooked = cart.items.length;
+	//New context
+	//const dispatch = useContext(CartDispatchContext);
+	const { tours } = useContext(CartStateContext);
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -76,7 +82,8 @@ function NavbarComponent() {
 
 				<Navbar.Collapse className="justify-content-end">
 					<Button onClick={handleShow} variant="outline-success">
-						<AiOutlineShoppingCart onClick={handleShow} /> {toursBooked} tour(s)
+						<AiOutlineShoppingCart onClick={handleShow} /> {tours.length}{' '}
+						tour(s)
 					</Button>
 				</Navbar.Collapse>
 
@@ -99,24 +106,21 @@ function NavbarComponent() {
 			<hr></hr>
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Shopping Cart</Modal.Title>
+					<Modal.Title>
+						<Message variant="success">
+							Tours Booked - Review and Update
+						</Message>
+					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					{toursCount > 0 ? (
+					{tours.length > 0 ? (
 						<>
-							<h2>Tours in your cart:</h2>
-							<hr></hr>
-							{cart.items.map((currentProduct, idx) => (
-								<CartProduct
-									key={idx}
-									id={currentProduct.id}
-									quantity={currentProduct.quantity}
-								></CartProduct>
+							{tours.map((tour, idx) => (
+								<CartProduct key={idx} tour={tour} tours={tours} />
 							))}
 
 							<h5>
-								Total: {moneyFormatter.format(cart.getTotalCost())} for{' '}
-								{toursBooked} tour(s)
+								Total: {moneyFormatter.format(90)} for {99999} tour(s)
 							</h5>
 							<hr></hr>
 
@@ -135,7 +139,10 @@ function NavbarComponent() {
 							</Link>
 						</>
 					) : (
-						<h2 className="text-danger">There are no items in your cart!</h2>
+						<Message>
+							There are no items in your cart! Check the listing and book a
+							trip.
+						</Message>
 					)}
 				</Modal.Body>
 			</Modal>

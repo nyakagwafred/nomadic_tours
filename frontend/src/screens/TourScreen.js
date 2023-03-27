@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Badge } from 'react-bootstrap';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { toursArray } from '../data/ToursStore';
 import { useParams } from 'react-router-dom';
