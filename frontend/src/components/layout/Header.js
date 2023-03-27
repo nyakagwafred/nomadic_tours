@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Navbar, Modal, Form } from 'react-bootstrap';
+import { Button, Navbar, Modal, Form, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
@@ -123,19 +123,38 @@ function NavbarComponent() {
 							</h5>
 							<hr></hr>
 
-							<Link to="/paypal">
-								<button
-									type="button"
-									style={{
-										alignItems: 'center',
-										width: '100%',
-										marginHorizontal: 20,
-									}}
-									className="btn btn-success"
-								>
-									Proceed to payment
-								</button>
-							</Link>
+							<Row>
+								<Col>
+									<Link to="/paypal">
+										<button
+											type="button"
+											style={{
+												alignItems: 'center',
+												width: '100%',
+												marginHorizontal: 20,
+											}}
+											className="btn btn-success"
+										>
+											Proceed to checkout
+										</button>
+									</Link>
+								</Col>
+								<Col>
+									<Link to="/home" onClick={handleClose}>
+										<button
+											type="button"
+											style={{
+												alignItems: 'center',
+												width: '100%',
+												marginHorizontal: 20,
+											}}
+											className="btn btn-dark"
+										>
+											Add more tours
+										</button>
+									</Link>
+								</Col>
+							</Row>
 						</>
 					) : (
 						<Message>
