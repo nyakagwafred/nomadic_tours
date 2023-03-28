@@ -1,4 +1,4 @@
-# Nomadic tours - eCommerce App running on MERN Stack
+# Nomadic tours - eCommerce App Running on MERN Stack
 
 This simplified version of an e-commerce platform, focusing on user registration, product listing, and shopping cart functionalities
 
@@ -42,10 +42,10 @@ npm run build
 - Nodejs
 - MongoDB
 
-Any advise for common problems or issues.
+Advise for common problems or issues.
 
 ```
-command to run if program contains helper info
+Just raise an issue or start a discussion on this repo.
 ```
 
 ## Version History
