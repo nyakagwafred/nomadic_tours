@@ -6,8 +6,6 @@ This simplified version of an e-commerce platform, focusing on user registration
 
 The app allows a user to register/sign in , they can browse a list of available tour packages which they can book, update booked tours on the shopping cart and proceed to checkout.
 
-An in-depth paragraph about your project and overview of use.
-
 ## Getting Started
 
 Goto the project folder and install required dependencies:
@@ -35,21 +33,14 @@ npm run build
 - Windows 10
 - Linux
 
-### Installing
+## Technologies Used
 
-- How/where to download your program
-- Any modifications needed to be made to files/folders
-
-### Executing program
-
-- How to run the program
-- Step-by-step bullets
-
-```
-code blocks for commands
-```
-
-## Help
+- HTML
+- CSS
+- JavaScript
+- React
+- Nodejs
+- MongoDB
 
 Any advise for common problems or issues.
 
@@ -68,7 +59,11 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
+### Inspiration etc.
+
+- [Mara Nomads](maranomads.com)
+
+### Code snippets etc.
 
 - [Brad Traversy](https://github.com/bradtraversy/)
 - [Sivadass](https://sivadass.github.io/react-shopping-cart/)
