@@ -10,6 +10,7 @@ import {
 } from '../context/TestCartContext';
 import moneyFormatter from '../components/utils/CurrencyFormatter';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
+import TourScreen from './TourScreen';
 
 function TourCard({ tour }) {
 	//Old context API
@@ -32,7 +33,7 @@ function TourCard({ tour }) {
 	} = tour;
 
 	const handleAddToCart = () => {
-		const product = { ...tour, quantity: 1, tourists: 1, max_people: 10 };
+		const product = { ...tour, people: 1 };
 		addToCart(dispatch, product);
 		setIsAdded(true);
 	};
@@ -44,7 +45,10 @@ function TourCard({ tour }) {
 
 	return (
 		<Card className="mt-5">
-			<Link to={`/tour/${_id}`}>
+			<Link
+				to={`#`}
+				className="text-monospace text-decoration-none text-success"
+			>
 				<Card.Img
 					src={image}
 					variant="top"
@@ -57,7 +61,7 @@ function TourCard({ tour }) {
 
 			<Card.Body>
 				<Link
-					to={`/tour/${_id}`}
+					to={`#`}
 					className="text-monospace text-decoration-none text-success"
 				>
 					<Card.Title as="div" className="text-center">

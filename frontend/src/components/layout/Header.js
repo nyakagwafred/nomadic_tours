@@ -12,12 +12,7 @@ import {
 	setSearchTour,
 	setSearchCategory,
 } from '../../context/SearchContext';
-import {
-	CartDispatchContext,
-	CartStateContext,
-	removeFromCart,
-	addToCart,
-} from '../../context/TestCartContext';
+import { CartStateContext } from '../../context/TestCartContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout, reset } from '../../features/auth/authSlice';
@@ -47,6 +42,12 @@ function NavbarComponent() {
 	//New context
 	//const dispatch = useContext(CartDispatchContext);
 	const { tours } = useContext(CartStateContext);
+	//Cart items calculations
+	const tourCountInCart = tours.length;
+	const totalPrice = tours.reduce(
+		(sum, tour) => sum + tour.price * tour.people,
+		0,
+	);
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -82,7 +83,7 @@ function NavbarComponent() {
 
 				<Navbar.Collapse className="justify-content-end">
 					<Button onClick={handleShow} variant="outline-success">
-						<AiOutlineShoppingCart onClick={handleShow} /> {tours.length}{' '}
+						<AiOutlineShoppingCart onClick={handleShow} /> {tourCountInCart}{' '}
 						tour(s)
 					</Button>
 				</Navbar.Collapse>
@@ -120,7 +121,8 @@ function NavbarComponent() {
 							))}
 
 							<h5>
-								Total: {moneyFormatter.format(90)} for {99999} tour(s)
+								Total: {moneyFormatter.format(totalPrice)} for {tourCountInCart}{' '}
+								tour(s)
 							</h5>
 							<hr></hr>
 
@@ -134,7 +136,7 @@ function NavbarComponent() {
 									}}
 									className="btn btn-success"
 								>
-									Proceed to payment
+									Proceed to checkout
 								</button>
 							</Link>
 						</>

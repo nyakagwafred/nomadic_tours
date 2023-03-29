@@ -2,7 +2,6 @@ import React, { useReducer, createContext, useEffect } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 const initialState = {
-	isCartOpen: false,
 	tours: [],
 };
 
@@ -26,7 +25,6 @@ const reducer = (state, action) => {
 					if (tour.id === id) {
 						return {
 							...tour,
-							quantity: 1,
 						};
 					}
 					return tour;
@@ -42,22 +40,21 @@ const reducer = (state, action) => {
 		/*************************************** */
 		case 'ADD_ONE_TO_TOUR':
 			id = action.payload.cartItemId;
-			console.log(id);
-
-			isOld = state.tours.map((tour) => tour.id).includes(id);
+			isOld = state.tours.map((tour) => tour._id).includes(id);
 			cartItems = null;
 			if (isOld) {
 				const tours = state.tours.map((tour) => {
-					if (tour.id === id) {
+					if (tour._id === id) {
 						return {
 							...tour,
-							tourists: tour.tourists + 1,
+							people: tour.people + 1,
 						};
 					}
 					return tour;
 				});
 				cartItems = [...tours];
 			} else {
+				console.log('Not found');
 				cartItems = [...state.tours, action.payload.cartItem];
 			}
 			return {
@@ -67,21 +64,21 @@ const reducer = (state, action) => {
 		/*************************************** */
 		case 'REMOVE_ONE_FROM_TOUR':
 			id = action.payload.cartItemId;
-
-			isOld = state.tours.map((tour) => tour.id).includes(id);
+			isOld = state.tours.map((tour) => tour._id).includes(id);
 			cartItems = null;
 			if (isOld) {
 				const tours = state.tours.map((tour) => {
-					if (tour.id === id) {
+					if (tour._id === id) {
 						return {
 							...tour,
-							people: tour.tourists - 1,
+							people: tour.people - 1,
 						};
 					}
 					return tour;
 				});
 				cartItems = [...tours];
 			} else {
+				console.log('Not found');
 				cartItems = [...state.tours, action.payload.cartItem];
 			}
 			return {
@@ -122,15 +119,6 @@ export const addToCart = (dispatch, cartItem) => {
 		},
 	});
 };
-//Remove a tour from cart
-export const removeFromCart = (dispatch, cartItemId) => {
-	return dispatch({
-		type: 'REMOVE_TOUR_FROM_CART',
-		payload: {
-			cartItemId: cartItemId,
-		},
-	});
-};
 //Add a person to a tour
 export const addOneToCart = (dispatch, cartItemId) => {
 	return dispatch({
@@ -140,6 +128,16 @@ export const addOneToCart = (dispatch, cartItemId) => {
 		},
 	});
 };
+//Remove a tour from cart
+export const removeFromCart = (dispatch, cartItemId) => {
+	return dispatch({
+		type: 'REMOVE_TOUR_FROM_CART',
+		payload: {
+			cartItemId: cartItemId,
+		},
+	});
+};
+
 //Remove a person from a tour
 export const removeOneFromCart = (dispatch, cartItemId) => {
 	return dispatch({
@@ -161,11 +159,12 @@ const CartProvider = ({ children }) => {
 		'cartItems',
 		[],
 	);
+	//console.log(persistedCartItems);
 	const persistedCartState = {
-		isCartOpen: false,
 		tours: persistedCartItems || [],
 	};
 	const [state, dispatch] = useReducer(reducer, persistedCartState);
+	//console.log(persistedCartItems);
 	useEffect(() => {
 		setPersistedCartItems(state.tours);
 	}, [JSON.stringify(state.tours)]);

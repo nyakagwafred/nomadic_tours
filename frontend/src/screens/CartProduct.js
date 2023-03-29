@@ -15,35 +15,23 @@ import {
 	addOneToCart,
 	removeOneFromCart,
 } from '../context/TestCartContext';
+import Message from '../components/utils/Message';
 
-function CartProduct(tour, tours) {
+function CartProduct({ tour }) {
 	const dispatch = useContext(CartDispatchContext);
 	//const { tours } = useContext(CartStateContext);
-	const {
-		image,
-		price,
-		_id,
-		category,
-		tour_brief,
-		duration,
-		num_reviews,
-		tour_name,
-		rating,
-		quantity,
-		tourists,
-	} = tour;
+
+	const { _id, people, tour_name, duration, price, country } = tour;
 
 	//Cart actions handlers
 	const handleRemoveFromCart = () => {
-		removeFromCart(dispatch, tour.tour._id);
+		removeFromCart(dispatch, _id);
 	};
 	const handleRemoveOneFromCart = () => {
-		removeOneFromCart(dispatch, tour._id);
+		removeOneFromCart(dispatch, _id);
 	};
 	const handleAddOneToCart = () => {
-		//addOneToCart(dispatch, tour.tour._id);
-		console.log(tours);
-		//console.log(tour.tour._id);
+		addOneToCart(dispatch, _id);
 	};
 
 	return (
@@ -52,10 +40,14 @@ function CartProduct(tour, tours) {
 				<Row>
 					{/* Product catalog in cart */}
 					<Col sm={6}>
+						{people < 1 && (
+							<Message>A trip should have at least one person</Message>
+						)}
+						{people >= 10 && <Message>A max of 10 people allowed.</Message>}
 						<p>
-							To {tour.tour.tour_name} at{' '}
-							<u>{moneyFormatter.format(tour.tour.price)}</u> for{' '}
-							{tour.tour.duration} days with {tour.tour.tourists} person.
+							To {tour_name} at <u>{moneyFormatter.format(people * price)}</u>{' '}
+							for {duration} days with{' '}
+							{people > 1 ? `${people} people` : `${people} person`}.
 						</p>
 					</Col>
 					{/* Remove tour from cart */}
@@ -76,6 +68,7 @@ function CartProduct(tour, tours) {
 							variant="success"
 							size="sm"
 							onClick={handleRemoveOneFromCart}
+							disabled={people < 1}
 						>
 							{' '}
 							<a
@@ -88,7 +81,12 @@ function CartProduct(tour, tours) {
 					</Col>
 					{/* Add a person to tour. */}
 					<Col sm={2}>
-						<Button variant="success" size="sm" onClick={handleAddOneToCart}>
+						<Button
+							variant="success"
+							size="sm"
+							onClick={handleAddOneToCart}
+							disabled={people >= 10}
+						>
 							{' '}
 							<a
 								data-tooltip-id="my-tooltip"
