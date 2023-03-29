@@ -22,7 +22,8 @@ const getTours = asyncHandler(async (req, res) => {
 		.limit(pageSize)
 		.skip(pageSize * (page - 1));
 
-	res.json({ tours, page, pages: Math.ceil(count / pageSize) });
+	// res.json({ tours, page, pages: Math.ceil(count / pageSize) });
+	res.json({ tours });
 });
 
 // @desc    Fetch single tour

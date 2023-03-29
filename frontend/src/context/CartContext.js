@@ -5,16 +5,16 @@ import { getTourData } from '../data/ToursStore';
 export const CartContext = createContext({
 	items: [],
 	getTourQuantity: () => {},
+	removeFromCart: () => {},
+	addToCart: () => {},
 	addOneToCart: () => {},
 	removeOneFromCart: () => {},
-	deleteFromCart: () => {},
 	getTotalCost: () => {},
 });
 
 export function CartProvider({ children }) {
 	const [cartTours, setCartTours] = useState([]);
-
-	// [ { id: 1 , quantity: 3 }, { id: 2, quantity: 1 } ]
+	// [ { id: 1 , quantity: 3, people: 1 }, { id: 2, quantity: 1, people: 1 } ]
 	function getTourQuantity(id) {
 		const quantity = cartTours.find((element) => element.id === id);
 
@@ -24,10 +24,11 @@ export function CartProvider({ children }) {
 			return 1;
 		}
 	}
-
-	function addOneToCart(id) {
+	//Add tour to cart
+	function addToCart(id) {
+		console.log('Add to cart');
+		console.log(cartTours);
 		const quantity = getTourQuantity(id);
-
 		if (quantity === 0) {
 			// product is not in cart
 			setCartTours([
@@ -35,56 +36,77 @@ export function CartProvider({ children }) {
 				{
 					id: id,
 					quantity: 1,
+					people: 1,
 				},
 			]);
-			console.log(cartTours);
 		} else {
-			// product is in cart
-			// [ { id: 1 , quantity: 3 }, { id: 2, quantity: 1 } ]    add to product id of 2
 			setCartTours(
 				cartTours.map(
-					(product) =>
-						product.id === id // if condition
-							? { ...product, quantity: product.quantity + 1 } // if statement is true
-							: product, // if statement is false
+					(tour) =>
+						tour.id === id // if condition
+							? { ...tour, quantity: tour.quantity + 1 } // if statement is true
+							: tour, // if statement is false
 				),
 			);
 		}
 	}
-
+	//Remove on passenger from booked tour
 	function removeOneFromCart(id) {
 		const quantity = getTourQuantity(id);
 
 		if (quantity === 1) {
-			deleteFromCart(id);
+			removeFromCart(id);
 		} else {
 			setCartTours(
 				cartTours.map(
-					(product) =>
-						product.id === id // if condition
-							? { ...product, quantity: product.quantity - 1 } // if statement is true
-							: product, // if statement is false
+					(tour) =>
+						tour.id === id // if condition
+							? { ...tour, quantity: 1, people: tour.people - 1 } // if statement is true
+							: tour, // if statement is false
 				),
 			);
 		}
+		console.log('Remove one from cart');
+		console.log(cartTours);
 	}
-
-	function deleteFromCart(id) {
-		// [] if an object meets a condition, add the object to array
-		// [product1, product2, product3]
-		// [product1, product3]
+	//Remove tour from cart
+	function removeFromCart(id) {
+		console.log('Remove to cart');
+		console.log(cartTours);
 		setCartTours((cartTours) =>
-			cartTours.filter((currentProduct) => {
-				return currentProduct.id !== id;
+			cartTours.filter((currentTour) => {
+				return currentTour.id !== id;
 			}),
 		);
 	}
+	// Add one tour to cart
+	function addOneToCart(id) {
+		const quantity = getTourQuantity(id);
+		const { people } = cartTours;
 
+		if (quantity === 1) {
+			//removeFromCart(id);
+			console.log(`Number of tours ${quantity}`);
+			console.log(`Number of people ${people}`);
+		} else {
+			setCartTours(
+				cartTours.map(
+					(tour) =>
+						tour.id === id // if condition
+							? { ...tour, quantity: 10, people: tour.people + 1 } // if statement is true
+							: tour, // if statement is false
+				),
+			);
+		}
+		console.log('Add one to cart');
+		console.log(cartTours);
+	}
+	//Get total cost based on numbers of tours and booked passengers
 	function getTotalCost() {
 		let totalCost = 0;
 		cartTours.map((cartItem) => {
 			const productData = getTourData(cartItem.id);
-			totalCost += productData.price * cartItem.quantity;
+			totalCost += productData.price * cartItem.people;
 		});
 		return totalCost;
 	}
@@ -94,8 +116,9 @@ export function CartProvider({ children }) {
 		getTourQuantity,
 		addOneToCart,
 		removeOneFromCart,
-		deleteFromCart,
+		removeFromCart,
 		getTotalCost,
+		addToCart,
 	};
 
 	return (

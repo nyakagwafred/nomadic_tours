@@ -1,26 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Badge } from 'react-bootstrap';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { toursArray } from '../data/ToursStore';
 import { useParams } from 'react-router-dom';
 import moneyFormatter from '../components/utils/CurrencyFormatter';
 import { useContext } from 'react';
-import { CartContext } from '../context/CartContext';
 
-function TourScreen({}) {
-	const { id } = useParams();
-	const tour = toursArray.find((element) => element.id == id);
-	const cart = useContext(CartContext);
-	const tourQuantity = cart.getTourQuantity(tour.id);
+import {
+	CartDispatchContext,
+	CartStateContext,
+	addToCart,
+	removeFromCart,
+} from '../context/TestCartContext';
+import { useLocation } from 'react-router-dom';
+
+function TourScreen({ tour }) {
+	// const { id } = useParams();
+	// const dispatch = useContext(CartDispatchContext);
+	// const { tours } = useContext(CartStateContext);
+	// const tour = toursArray.find((tour) => tour.id == id);
+	// const { _id, people, tour_name, duration, price, country } = tour;
+
+	// const [isAdded, setIsAdded] = useState(false);
+	// console.log(id);
+
+	// const handleAddToCart = () => {
+	// 	const product = { ...tour, people: 1 };
+	// 	addToCart(dispatch, product);
+	// 	setIsAdded(true);
+	// };
+
+	// const handleRemoveFromCart = () => {
+	// 	removeFromCart(dispatch, _id);
+	// 	setIsAdded(false);
+	//};
+
+	const location = useLocation();
+	console.log();
+	//console.log(location.state.fromBlogRoll);
+
 	return (
 		<div>
 			<Header />
 			<Container className="mt-5">
 				<Row>
-					<Col md={6}>
+					<h3>Tour screen {tour.price}</h3>
+					{/* <Col md={6}>
 						<ListGroup variant="flush">
 							<ListGroup.Item>
 								<Image src={tour.image} fluid />
@@ -58,11 +86,11 @@ function TourScreen({}) {
 								<h5>{moneyFormatter.format(tour.price)}</h5>
 							</ListGroup.Item>
 							<ListGroup.Item>
-								{tourQuantity > 0 ? (
+								{isAdded ? (
 									<>
 										<Button
 											variant="danger"
-											onClick={() => cart.deleteFromCart(tour.id)}
+											onClick={handleRemoveFromCart}
 											style={{
 												alignItems: 'center',
 												width: '100%',
@@ -75,7 +103,7 @@ function TourScreen({}) {
 								) : (
 									<Button
 										variant="dark"
-										onClick={() => cart.addOneToCart(tour.id)}
+										onClick={handleAddToCart}
 										style={{
 											alignItems: 'center',
 											width: '100%',
@@ -87,7 +115,7 @@ function TourScreen({}) {
 								)}
 							</ListGroup.Item>
 						</ListGroup>
-					</Col>
+					</Col> */}
 				</Row>
 			</Container>
 			<Footer />

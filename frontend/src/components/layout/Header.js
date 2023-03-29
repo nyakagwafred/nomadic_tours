@@ -12,6 +12,7 @@ import {
 	setSearchTour,
 	setSearchCategory,
 } from '../../context/SearchContext';
+import { CartStateContext } from '../../context/TestCartContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout, reset } from '../../features/auth/authSlice';
@@ -20,7 +21,7 @@ import Message from '../utils/Message';
 function NavbarComponent() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const cart = useContext(CartContext);
+
 	const commonDispatch = useContext(CommonDispatchContext);
 	const [show, setShow] = useState(false);
 	const { user } = useSelector((state) => state.auth);
@@ -38,10 +39,15 @@ function NavbarComponent() {
 		console.log(`Category keyword is ....${event.target.value}`);
 		return setSearchCategory(commonDispatch, event.target.value);
 	};
-
-	const toursCount = cart.items.reduce((sum, tour) => sum + tour.quantity, 0);
-
-	const toursBooked = cart.items.length;
+	//New context
+	//const dispatch = useContext(CartDispatchContext);
+	const { tours } = useContext(CartStateContext);
+	//Cart items calculations
+	const tourCountInCart = tours.length;
+	const totalPrice = tours.reduce(
+		(sum, tour) => sum + tour.price * tour.people,
+		0,
+	);
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -77,7 +83,8 @@ function NavbarComponent() {
 
 				<Navbar.Collapse className="justify-content-end">
 					<Button onClick={handleShow} variant="outline-success">
-						<AiOutlineShoppingCart onClick={handleShow} /> {toursBooked} tour(s)
+						<AiOutlineShoppingCart onClick={handleShow} /> {tourCountInCart}{' '}
+						tour(s)
 					</Button>
 				</Navbar.Collapse>
 
@@ -102,27 +109,37 @@ function NavbarComponent() {
 				<Modal.Header closeButton>
 					<Modal.Title>
 						<Message variant="success">
+<<<<<<< HEAD
 							Your Shopping Cart. Review and update
+=======
+							Tours Booked - Review and Update
+>>>>>>> update-Items-cart-23
 						</Message>
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					{toursCount > 0 ? (
+					{tours.length > 0 ? (
 						<>
+<<<<<<< HEAD
 							{cart.items.map((currentProduct, idx) => (
 								<CartProduct
 									key={idx}
 									id={currentProduct.id}
 									quantity={currentProduct.quantity}
 								></CartProduct>
+=======
+							{tours.map((tour, idx) => (
+								<CartProduct key={idx} tour={tour} tours={tours} />
+>>>>>>> update-Items-cart-23
 							))}
 
 							<h5>
-								Total: {moneyFormatter.format(cart.getTotalCost())} for{' '}
-								{toursBooked} tour(s)
+								Total: {moneyFormatter.format(totalPrice)} for {tourCountInCart}{' '}
+								tour(s)
 							</h5>
 							<hr></hr>
 
+<<<<<<< HEAD
 							<Row>
 								<Col>
 									<Link to="/paypal">
@@ -159,6 +176,26 @@ function NavbarComponent() {
 					) : (
 						<Message>
 							No items in your cart. Check the listings and book your tour.
+=======
+							<Link to="/paypal">
+								<button
+									type="button"
+									style={{
+										alignItems: 'center',
+										width: '100%',
+										marginHorizontal: 20,
+									}}
+									className="btn btn-success"
+								>
+									Proceed to checkout
+								</button>
+							</Link>
+						</>
+					) : (
+						<Message>
+							There are no items in your cart! Check the listing and book a
+							trip.
+>>>>>>> update-Items-cart-23
 						</Message>
 					)}
 				</Modal.Body>

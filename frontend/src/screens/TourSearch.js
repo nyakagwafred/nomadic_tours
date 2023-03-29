@@ -1,21 +1,48 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import TourCard from './TourCard';
 import { Row, Col, Container } from 'react-bootstrap';
+<<<<<<< HEAD
 import { toursArray } from '../data/ToursStore';
+=======
+>>>>>>> update-Items-cart-23
 import { CommonStateContext } from '../context/SearchContext';
 import Message from '../components/utils/Message';
+import Spinner from 'react-bootstrap/Spinner';
+
+import {
+	ProductsStateContext,
+	ProductsDispatchContext,
+	getProducts,
+} from '../context/ProductContext';
 
 function TourSearch() {
 	const { searchTour } = useContext(CommonStateContext);
+	const { products, isLoading } = useContext(ProductsStateContext);
+	const dispatch = useContext(ProductsDispatchContext);
 
 	let toursList =
-		toursArray &&
-		toursArray.filter((tour) => {
+		products &&
+		products.filter((tour) => {
 			return (
 				tour.tour_name.toLowerCase().includes(searchTour.toLowerCase()) ||
 				!searchTour
 			);
 		});
+
+	useEffect(() => {
+		getProducts(dispatch);
+	}, []);
+
+	if (isLoading) {
+		return (
+			<Container>
+				<Row className="vh-100 d-flex justify-content-center align-items-center">
+					<Spinner animation="border" />
+				</Row>
+			</Container>
+		);
+	}
+
 	if (toursList == 0) {
 		return (
 			<>
