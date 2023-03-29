@@ -109,28 +109,15 @@ function NavbarComponent() {
 				<Modal.Header closeButton>
 					<Modal.Title>
 						<Message variant="success">
-<<<<<<< HEAD
-							Your Shopping Cart. Review and update
-=======
 							Tours Booked - Review and Update
->>>>>>> update-Items-cart-23
 						</Message>
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					{tours.length > 0 ? (
 						<>
-<<<<<<< HEAD
-							{cart.items.map((currentProduct, idx) => (
-								<CartProduct
-									key={idx}
-									id={currentProduct.id}
-									quantity={currentProduct.quantity}
-								></CartProduct>
-=======
 							{tours.map((tour, idx) => (
 								<CartProduct key={idx} tour={tour} tours={tours} />
->>>>>>> update-Items-cart-23
 							))}
 
 							<h5>
@@ -139,44 +126,6 @@ function NavbarComponent() {
 							</h5>
 							<hr></hr>
 
-<<<<<<< HEAD
-							<Row>
-								<Col>
-									<Link to="/paypal">
-										<button
-											type="button"
-											style={{
-												alignItems: 'center',
-												width: '100%',
-												marginHorizontal: 20,
-											}}
-											className="btn btn-success"
-										>
-											Proceed to checkout
-										</button>
-									</Link>
-								</Col>
-								<Col>
-									<Link to="/home" onClick={handleClose}>
-										<button
-											type="button"
-											style={{
-												alignItems: 'center',
-												width: '100%',
-												marginHorizontal: 20,
-											}}
-											className="btn btn-dark"
-										>
-											Add more tours
-										</button>
-									</Link>
-								</Col>
-							</Row>
-						</>
-					) : (
-						<Message>
-							No items in your cart. Check the listings and book your tour.
-=======
 							<Link to="/paypal">
 								<button
 									type="button"
@@ -195,7 +144,6 @@ function NavbarComponent() {
 						<Message>
 							There are no items in your cart! Check the listing and book a
 							trip.
->>>>>>> update-Items-cart-23
 						</Message>
 					)}
 				</Modal.Body>

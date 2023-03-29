@@ -1,10 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import TourCard from './TourCard';
 import { Row, Col, Container } from 'react-bootstrap';
-<<<<<<< HEAD
-import { toursArray } from '../data/ToursStore';
-=======
->>>>>>> update-Items-cart-23
 import { CommonStateContext } from '../context/SearchContext';
 import Message from '../components/utils/Message';
 import Spinner from 'react-bootstrap/Spinner';
